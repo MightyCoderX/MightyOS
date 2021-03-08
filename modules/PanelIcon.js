@@ -32,9 +32,24 @@ class PanelIcon extends HTMLElement
 
     connectedCallback()
     {
-        let panelIconElem = this.shadow.querySelector('.panel-icon');
-        panelIconElem.title = this.getAttribute('app-desc');
         this.shadow.querySelector('.panel-icon img').src = this.getAttribute('icon-src');
+
+        let panelIconElem = this.shadow.querySelector('.panel-icon');
+        
+        panelIconElem.title = this.getAttribute('app-desc');
+        panelIconElem.addEventListener('click', e => this.toggleMinimized());
+    }
+
+    toggleMinimized(e)
+    {
+        applications.forEach(app =>
+        {
+            if(app.name == this.getAttribute('app-name'))
+            {
+                app.window.minimize();
+                return;
+            }
+        });
     }
 }
 

@@ -7,12 +7,12 @@ panelAppIconTemplate.innerHTML = `
         display: block;
         position: relative;
         height: 100%;
-        width: 64px;
         overflow: hidden;
     }
     .panel-icon img
     {
         object-fit: cover;
+        height: 100%;
     }
 </style>
 <div class="panel-icon" tabindex="0">
@@ -32,7 +32,8 @@ class PanelIcon extends HTMLElement
 
     connectedCallback()
     {
-        this.shadow.querySelector('.panel-icon').title = this.getAttribute('app-desc');
+        let panelIconElem = this.shadow.querySelector('.panel-icon');
+        panelIconElem.title = this.getAttribute('app-desc');
         this.shadow.querySelector('.panel-icon img').src = this.getAttribute('icon-src');
     }
 }

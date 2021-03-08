@@ -66,7 +66,7 @@ html, body
 
 .panel .start-menu
 {
-    height: var(--panel-height);
+    height: 100%;
     width: var(--panel-height);
     margin-right: 10px;
     display: grid;
@@ -115,12 +115,10 @@ html, body
     opacity: 1;
 }
 
-.panel .app-icon
+.panel panel-icon
 {
     width: 25px;
     height: 25px;
-    background: #1616ff;
-    border-radius: 100%;
     margin-right: 10px;
     border: none;
 }

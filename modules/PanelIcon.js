@@ -1,8 +1,15 @@
 const panelAppIconTemplate = document.createElement('template');
 
-desktopIconTemplate.innerHTML = `
+panelAppIconTemplate.innerHTML = `
 <style>
-
+    .panel-icon
+    {
+        overflow: hidden;
+    }
+    .panel-icon img
+    {
+        
+    }
 </style>
 <div class="panel-icon" tabindex="0">
     <img />
@@ -16,11 +23,13 @@ class PanelIcon extends HTMLElement
         super();
 
         this.shadow = this.attachShadow({mode: 'open'});
-        this.shadow.appendChild(desktopIconTemplate.content.cloneNode(true));
+        this.shadow.appendChild(panelAppIconTemplate.content.cloneNode(true));
     }
 
     connectedCallback()
     {
+        this.shadow.querySelector('.panel-icon').title = this.getAttribute('app-desc');
+        this.shadow.querySelector('.panel-icon img').src = this.getAttribute('icon-src');
         
     }
 }

@@ -60,8 +60,9 @@ class DesktopIcon extends HTMLElement
     
     connectedCallback()
     {
+        this.shadow.querySelector('.desktop-icon img').src = this.getAttribute('icon-src');
         this.shadow.querySelector('.desktop-icon p').textContent = this.getAttribute('label');
-        this.shadow.querySelector('.desktop-icon p').title = this.getAttribute('label');
+        this.shadow.querySelector('.desktop-icon').title = this.getAttribute('label');
         this.container = this.shadow.querySelector('.desktop-icon');
         
         this.container.addEventListener('dblclick', e =>

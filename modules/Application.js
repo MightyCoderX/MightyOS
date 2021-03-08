@@ -14,5 +14,8 @@ class Application
         this.window.setAttribute('window-title', this.name);
         this.window.setAttribute('content-url', this.url);
         windowsOverlay.appendChild(this.window);
+        this.panelIcon = document.createElement('panel-icon');
+        this.panelIcon.setAttribute('icon-src', this.iconSrc);
+        panel.appendChild(this.panelIcon);
     }
 }

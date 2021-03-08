@@ -4,11 +4,15 @@ panelAppIconTemplate.innerHTML = `
 <style>
     .panel-icon
     {
+        display: block;
+        position: relative;
+        height: 100%;
+        width: 64px;
         overflow: hidden;
     }
     .panel-icon img
     {
-        
+        object-fit: cover;
     }
 </style>
 <div class="panel-icon" tabindex="0">
@@ -30,7 +34,6 @@ class PanelIcon extends HTMLElement
     {
         this.shadow.querySelector('.panel-icon').title = this.getAttribute('app-desc');
         this.shadow.querySelector('.panel-icon img').src = this.getAttribute('icon-src');
-        
     }
 }
 

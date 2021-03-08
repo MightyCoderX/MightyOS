@@ -2,6 +2,7 @@ const btnStartMenu = document.getElementById('btnStartMenu');
 const menuElem = document.querySelector('.menu');
 const desktop = document.querySelector('.desktop');
 const windowsOverlay = document.querySelector('.windows-overlay');
+const panel = document.querySelector('.panel');
 
 const applications = new Set();
 

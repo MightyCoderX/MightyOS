@@ -22,6 +22,7 @@ class Application
         this.window.onclose = () =>
         {
             this.panelIcon.remove();
+            this.window = null;
         }
     }
 }

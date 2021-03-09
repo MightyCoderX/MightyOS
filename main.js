@@ -11,7 +11,9 @@ btnStartMenu.addEventListener('click', e =>
     menuElem.classList.toggle('show');
 });
 
+applications.add(new Application('Notepad', 'A basic notepad', './apps/notepad/icon.svg', './apps/notepad/'));
 applications.add(new Application('MightyCoderX', 'My website', 'https://mightycoderx.github.io/images/bg.jpg', 'https://mightycoderx.github.io'));
+
 
 for(let app of applications)
 {

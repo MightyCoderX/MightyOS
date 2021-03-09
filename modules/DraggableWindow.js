@@ -35,6 +35,7 @@ draggableWindowTemplate.innerHTML = `
     .window .header .title
     {
         pointer-events: none;
+        user-select: none;
     }
     
     .window .header .left-buttons
@@ -75,7 +76,7 @@ draggableWindowTemplate.innerHTML = `
         background: #333;
         height: calc(100% - var(--header-height));
         width: 100%;
-        cursor: ew-resize;
+        user-select: none;
     }
 </style>
 <div class="window">
@@ -108,8 +109,8 @@ class DraggableWindow extends HTMLElement
 
     connectedCallback()
     {
-        this.style.position = 'absolute';
         this.windowFrame = this.shadow.querySelector('.window');
+        this.windowFrame.position = 'absolute';
         this.header = this.shadow.querySelector('.header');
         this.titleElem = this.shadow.querySelector('.header .title');
         this.btnMinimize = this.shadow.querySelector('.header .minimize');
@@ -171,34 +172,36 @@ class DraggableWindow extends HTMLElement
     dragWindow()
     {
         let windowMouseX, windowMouseY;
-
     
         this.header.addEventListener('mousedown', e =>
         {
             this.headerMouseDown = true;
             windowMouseX = e.clientX - this.windowFrame.offsetLeft;
             windowMouseY = e.clientY - this.windowFrame.offsetTop;
+            this.body.style.pointerEvents = 'none';
         });
         
-        document.addEventListener('mouseup', e =>
+        this.header.addEventListener('mouseup', e =>
         {
             this.headerMouseDown = false;
             this.header.removeEventListener('mousemove', windowDrag);
+            this.body.style.pointerEvents = 'all';
         });
         
-        document.addEventListener('mousemove', e =>
+        window.addEventListener('mousemove', e =>
         {
             if(this.headerMouseDown)
             {
                 if(this.maximized)
                 {
                     this.maximize();
-
+                    
                     this.windowFrame.style.left = e.clientX - this.startSize.width/2 + 'px';
                     this.windowFrame.style.top = e.clientY - this.header.offsetHeight/2 + 'px';
                     windowMouseX = e.clientX - this.windowFrame.offsetLeft;
                     windowMouseY = e.clientY - this.windowFrame.offsetTop;
                 }
+                windowDrag(e);
     
                 // if(!maximized && this.windowContainer.offsetTop <= 5)
                 // {
@@ -207,11 +210,10 @@ class DraggableWindow extends HTMLElement
                 //     this.windowContainer.blur();
                 //     return;
                 // }
-                windowDrag(e);
             }
         });
     
-        document.addEventListener('mouseleave', e =>
+        window.addEventListener('mouseleave', e =>
         {
             this.headerMouseDown = false;
         });

@@ -30,7 +30,6 @@ desktopIconTemplate.innerHTML = `
     {
         object-fit: cover;
         width: 80%;
-        height: auto;
     }
     
     .desktop-icon p
@@ -61,6 +60,7 @@ class DesktopIcon extends HTMLElement
     connectedCallback()
     {
         this.shadow.querySelector('.desktop-icon img').src = this.getAttribute('icon-src');
+        this.shadow.querySelector('.desktop-icon img').style.height = this.clientHeight * 0.7 + 'px';
         this.shadow.querySelector('.desktop-icon p').textContent = this.getAttribute('label');
         this.shadow.querySelector('.desktop-icon').title = this.getAttribute('label');
         this.container = this.shadow.querySelector('.desktop-icon');
@@ -70,7 +70,7 @@ class DesktopIcon extends HTMLElement
             let appName = this.getAttribute('app-name');
             applications.forEach(app =>
             {
-                if(app.name == appName)
+                if(app.name == appName && !app.window)
                 {
                     app.createWindow();
                 }

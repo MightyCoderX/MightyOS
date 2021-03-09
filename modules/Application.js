@@ -18,5 +18,10 @@ class Application
         this.panelIcon.setAttribute('icon-src', this.iconSrc);
         this.panelIcon.setAttribute('app-name', this.name);
         panel.appendChild(this.panelIcon);
+        
+        this.window.onclose = () =>
+        {
+            this.panelIcon.remove();
+        }
     }
 }

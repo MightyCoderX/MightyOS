@@ -140,19 +140,19 @@ class DraggableWindow extends HTMLElement
         this.btnMaximize.addEventListener('click', () => this.maximize());
         this.btnClose.addEventListener('click', () => this.close());
 
-        this.resizing = '';
-        document.addEventListener('mousedown', e => this.mouseDown = true);
-        document.addEventListener('mouseup', e =>
-        {
-            this.mouseDown = false;
-            this.resizing = '';
-        });
-        document.addEventListener('mouseleave', e =>
-        {
-            this.mouseDown = false;
-            this.resizing = '';
-        });
-        document.addEventListener('mousemove', e => this.resize(e));
+        // this.resizing = '';
+        // document.addEventListener('mousedown', e => this.mouseDown = true);
+        // document.addEventListener('mouseup', e =>
+        // {
+        //     this.mouseDown = false;
+        //     this.resizing = '';
+        // });
+        // document.addEventListener('mouseleave', e =>
+        // {
+        //     this.mouseDown = false;
+        //     this.resizing = '';
+        // });
+        // document.addEventListener('mousemove', e => this.resize(e));
         
         new ResizeObserver(() =>
         {
@@ -272,62 +272,62 @@ class DraggableWindow extends HTMLElement
         }, dur*1000);
     }
 
-    resize(e)
-    {
-        if(this.maximized) return;
-        if(!this.mouseDown)
-        {
-            this.resizing = '';
-            return;
-        }
+    // resize(e)
+    // {
+    //     if(this.maximized) return;
+    //     if(!this.mouseDown)
+    //     {
+    //         this.resizing = '';
+    //         return;
+    //     }
         
-        let left = this.windowFrame.getBoundingClientRect().left;
-        let right = this.windowFrame.getBoundingClientRect().right;
-        let top = this.windowFrame.getBoundingClientRect().top;
-        let bottom = this.windowFrame.getBoundingClientRect().bottom;
+    //     let left = this.windowFrame.getBoundingClientRect().left;
+    //     let right = this.windowFrame.getBoundingClientRect().right;
+    //     let top = this.windowFrame.getBoundingClientRect().top;
+    //     let bottom = this.windowFrame.getBoundingClientRect().bottom;
         
-        if(this.resizing == '')
-        {
-            if(e.clientX >= left-2 && e.clientX <= left+2)
-            {
-                this.resizing = 'left';
-                document.body.style.cursor = 'ew-resize';
-            }
-            else if(e.clientX >= right-2 && e.clientX <= right+2)
-            {
-                this.resizing = 'right';
-                document.body.style.cursor = 'ew-resize';
-            }
-            else if(e.clientY >= top-2 && e.clientY <= top+2)
-            {
-                this.resizing = 'top';
-                document.body.style.cursor = 'ns-resize';
+    //     if(this.resizing == '')
+    //     {
+    //         if(e.clientX >= left-2 && e.clientX <= left+2)
+    //         {
+    //             this.resizing = 'left';
+    //             document.body.style.cursor = 'ew-resize';
+    //         }
+    //         else if(e.clientX >= right-2 && e.clientX <= right+2)
+    //         {
+    //             this.resizing = 'right';
+    //             document.body.style.cursor = 'ew-resize';
+    //         }
+    //         else if(e.clientY >= top-2 && e.clientY <= top+2)
+    //         {
+    //             this.resizing = 'top';
+    //             document.body.style.cursor = 'ns-resize';
                 
-            }
-            else if(e.clientY >= bottom-2 && e.clientY <= bottom+2)
-            {
-                this.resizing = 'bottom';
-                document.body.style.cursor = 'ns-resize';
-            }
-        }
-        else
-        {
-            switch(this.resizing)
-            {
-                case 'left':
-                    this.windowFrame.style.left = e.clientX + 'px';
-                    this.windowFrame.style.width = e.clientX + right + 'px';
-                    break;
-                case 'right':
-                    this.windowFrame.style.
-                    break;
-                case 'top':
-                    break;
-                case 'bottom':
-                    break;
-            }
-        }
-    }
+    //         }
+    //         else if(e.clientY >= bottom-2 && e.clientY <= bottom+2)
+    //         {
+    //             this.resizing = 'bottom';
+    //             document.body.style.cursor = 'ns-resize';
+    //         }
+    //     }
+    //     else
+    //     {
+    //         switch(this.resizing)
+    //         {
+    //             case 'left':
+    //                 this.windowFrame.style.left = e.clientX + 'px';
+    //                 this.windowFrame.style.width = e.clientX + right + 'px';
+    //                 break;
+    //             case 'right':
+    //                 this.windowFrame.style.
+    //                 break;
+    //             case 'top':
+    //                 break;
+    //             case 'bottom':
+    //                 break;
+    //         }
+    //     }
+    // }
 }
 
 customElements.define('draggable-window', DraggableWindow);

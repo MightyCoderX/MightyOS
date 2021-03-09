@@ -133,6 +133,8 @@ class DraggableWindow extends HTMLElement
         this.maximized = false;
         this.minimized = false;
         this.headerMouseDown = false;
+
+        this.onclose = () => {};
         
         this.btnMinimize.addEventListener('click', () => this.minimize());
         this.btnMaximize.addEventListener('click', () => this.maximize());
@@ -258,11 +260,12 @@ class DraggableWindow extends HTMLElement
 
     close()
     {
+        this.onclose();
         this.windowFrame.style.transformOrigin = 'center';
         this.windowFrame.style.transform = 'scale(0)';
 
         let dur = this.shadow.styleSheets[0].cssRules[0].style.transitionDuration.slice(0, -1);
-
+        
         setTimeout(() =>
         {
             this.remove();
@@ -316,6 +319,7 @@ class DraggableWindow extends HTMLElement
                     this.windowFrame.style.width = e.clientX + right + 'px';
                     break;
                 case 'right':
+                    this.windowFrame.style.
                     break;
                 case 'top':
                     break;

@@ -172,43 +172,38 @@ class DraggableWindow extends HTMLElement
     dragWindow()
     {
         let windowMouseX, windowMouseY;
-    
-        this.header.addEventListener('mousedown', mouseDown);
         
-        this.header.addEventListener('touchstart', mouseDown);
-        
-        function mouseDown(e)
+        let mouseDown = (e) =>
         {
-            e.clientX = e.clientX | e.changedTouches[0].pageX;
-            e.clientY = e.clientY | e.changedTouches[0].pageY;
+            let clientX = e.clientX | e.changedTouches?.[0].pageX;
+            let clientY = e.clientY | e.changedTouches?.[0].pageY;
             
             this.headerMouseDown = true;
-            windowMouseX = e.clientX - this.windowFrame.offsetLeft;
-            windowMouseY = e.clientY - this.windowFrame.offsetTop;
+            windowMouseX = clientX - this.windowFrame.offsetLeft;
+            windowMouseY = clientY - this.windowFrame.offsetTop;
             this.body.style.pointerEvents = 'none';
         }
+    
+        this.header.addEventListener('mousedown', mouseDown);
+        this.header.addEventListener('touchstart', mouseDown);
         
-        this.header.addEventListener('mouseup', mouseUp);
         
-        this.header.addEventListener('touchend', mouseUp);
-        
-        this.header.addEventListener('touchcancel', mouseUp);
-        
-        function mouseUp(e)
+        let mouseUp = (e) =>
         {
             this.headerMouseDown = false;
             this.header.removeEventListener('mousemove', windowDrag);
             this.body.style.pointerEvents = 'all';
         }
         
-        window.addEventListener('mousemove', mouseMove);
+        this.header.addEventListener('mouseup', mouseUp);
+        this.header.addEventListener('touchend', mouseUp);
+        this.header.addEventListener('touchcancel', mouseUp);
+
         
-        window.addEventListener('touchmove', mouseMove);
-        
-        function mouseMove(e)
+        let mouseMove = (e) =>
         {
-            e.clientX = e.clientX | e.changedTouches[0].pageX;
-            e.clientY = e.clientY | e.changedTouches[0].pageY;
+            let clientX = e.clientX | e.changedTouches?.[0].pageX;
+            let clientY = e.clientY | e.changedTouches?.[0].pageY;
             
             if(this.headerMouseDown)
             {
@@ -216,13 +211,13 @@ class DraggableWindow extends HTMLElement
                 {
                     this.maximize();
                     
-                    this.windowFrame.style.left = e.clientX - this.startSize.width/2 + 'px';
-                    this.windowFrame.style.top = e.clientY - this.header.offsetHeight/2 + 'px';
-                    windowMouseX = e.clientX - this.windowFrame.offsetLeft;
-                    windowMouseY = e.clientY - this.windowFrame.offsetTop;
+                    this.windowFrame.style.left = clientX - this.startSize.width/2 + 'px';
+                    this.windowFrame.style.top = clientY - this.header.offsetHeight/2 + 'px';
+                    windowMouseX = clientX - this.windowFrame.offsetLeft;
+                    windowMouseY = clientY - this.windowFrame.offsetTop;
                 }
-                windowDrag(e);
-    
+                windowDrag(clientX, clientY);
+                
                 // if(!maximized && this.windowContainer.offsetTop <= 5)
                 // {
                 //     mouseDown = false;
@@ -230,18 +225,21 @@ class DraggableWindow extends HTMLElement
                 //     this.windowContainer.blur();
                 //     return;
                 // }
-            }
+            }   
         }
-    
+            
+        window.addEventListener('mousemove', mouseMove);
+        window.addEventListener('touchmove', mouseMove);
+
         window.addEventListener('mouseleave', e =>
         {
             this.headerMouseDown = false;
         });
     
-        let windowDrag = e =>
+        let windowDrag = (clientX, clientY) =>
         {
-            this.windowFrame.style.left = e.clientX - windowMouseX + 'px';
-            this.windowFrame.style.top = e.clientY - windowMouseY + 'px';
+            this.windowFrame.style.left = clientX - windowMouseX + 'px';
+            this.windowFrame.style.top = clientY - windowMouseY + 'px';
         }
     }
 

@@ -173,22 +173,34 @@ class DraggableWindow extends HTMLElement
     {
         let windowMouseX, windowMouseY;
     
-        this.header.addEventListener('mousedown', e =>
+        this.header.addEventListener('mousedown', mouseDown);
+        
+        this.header.addEventListener('touchstart', mouseDown);
+        
+        function mouseDown(e)
         {
             this.headerMouseDown = true;
             windowMouseX = e.clientX - this.windowFrame.offsetLeft;
             windowMouseY = e.clientY - this.windowFrame.offsetTop;
             this.body.style.pointerEvents = 'none';
-        });
+        }
         
-        this.header.addEventListener('mouseup', e =>
+        this.header.addEventListener('mouseup', mouseUp);
+        
+        this.header.addEventListener('touchend', mouseUp);
+        
+        function mouseUp(e)
         {
             this.headerMouseDown = false;
             this.header.removeEventListener('mousemove', windowDrag);
             this.body.style.pointerEvents = 'all';
-        });
+        }
         
-        window.addEventListener('mousemove', e =>
+        window.addEventListener('mousemove', mouseMove);
+        
+        window.addEventListener('touchmove', mouseMove);
+        
+        function mouseMove(e)
         {
             if(this.headerMouseDown)
             {

@@ -223,7 +223,7 @@ class DraggableWindow extends HTMLElement
                 //     return;
                 // }
             }
-        });
+        }
     
         window.addEventListener('mouseleave', e =>
         {

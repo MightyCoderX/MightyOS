@@ -179,6 +179,9 @@ class DraggableWindow extends HTMLElement
         
         function mouseDown(e)
         {
+            e.clientX = e.clientX | e.changedTouches[0].pageX;
+            e.clientY = e.clientY | e.changedTouches[0].pageY;
+            
             this.headerMouseDown = true;
             windowMouseX = e.clientX - this.windowFrame.offsetLeft;
             windowMouseY = e.clientY - this.windowFrame.offsetTop;
@@ -188,6 +191,8 @@ class DraggableWindow extends HTMLElement
         this.header.addEventListener('mouseup', mouseUp);
         
         this.header.addEventListener('touchend', mouseUp);
+        
+        this.header.addEventListener('touchcancel', mouseUp);
         
         function mouseUp(e)
         {
@@ -202,6 +207,9 @@ class DraggableWindow extends HTMLElement
         
         function mouseMove(e)
         {
+            e.clientX = e.clientX | e.changedTouches[0].pageX;
+            e.clientY = e.clientY | e.changedTouches[0].pageY;
+            
             if(this.headerMouseDown)
             {
                 if(this.maximized)

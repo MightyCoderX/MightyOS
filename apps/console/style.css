@@ -3,7 +3,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Consolas';
 }
 
 body, html
@@ -12,16 +12,48 @@ body, html
     height: 100%;
 }
 
-#txtEditor
+#out
 {
     width: 100%;
     height: 100%;
-    outline: none;
     background: #333;
     border: none;
+    font-size: 12px;
+}
+
+#out div
+{
+    padding: 5px 8px;
+    border-left: none;
+    border-right: none;
+    position: relative;
+}
+
+#out div:not(:nth-child(1))
+{
+    margin-top: -1px;
+}
+
+.info
+{
     color: white;
-    padding: 8px;
-    font-size: 15px;
-    box-shadow: 0px 0px 5px inset #222;
-    resize: none;
+    border: 1px solid gray;
+    z-index: 0;
+}
+
+.warning
+{
+    color: #D8BB80;
+    background: #332B00;
+    border: 1px solid #665500;
+    z-index: 1;
+}
+
+.error
+{
+    color: #e25353;
+    background: #360000;
+    border: 1px solid #b60000;
+    font-weight: 400;
+    z-index: 1;
 }

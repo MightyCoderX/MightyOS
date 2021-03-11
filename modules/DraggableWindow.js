@@ -19,6 +19,8 @@ draggableWindowTemplate.innerHTML = `
         transition-timing-function: ease-in;
         border: 1px solid #222;
         pointer-events: all;
+        width: 40vw;
+        height: 60vh;
     }
     
     .window .header
@@ -95,7 +97,6 @@ draggableWindowTemplate.innerHTML = `
 </div>
 `;
 
-
 class DraggableWindow extends HTMLElement
 {
     constructor()
@@ -127,7 +128,7 @@ class DraggableWindow extends HTMLElement
             try{ this.titleElem.innerText = this.body.contentWindow.document.title; } catch(_){}
         });
 
-        this.startSize = { width: 720, height: 480 };
+        this.startSize = { width: this.windowFrame.clientWidth, height: this.windowFrame.clientHeight };
         this.position = { x: 100, y: 100 };
         this.size = this.startSize;
         

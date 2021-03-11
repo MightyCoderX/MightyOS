@@ -4,15 +4,31 @@ panelAppIconTemplate.innerHTML = `
 <style>
     .panel-icon
     {
-        display: block;
+        display: grid;
         position: relative;
         height: 100%;
         overflow: hidden;
+        place-items: center;
+        user-select: none;
     }
+    
+    .panel-icon:hover, panel-icon:active
+    {
+        outline: none;
+    }
+
+    .panel-icon:focus
+    {
+        outline: 2px solid white;
+        outline-offset: -2px;
+    }
+
     .panel-icon img
     {
+        user-select: none;
         object-fit: cover;
-        height: 100%;
+        height: 80%;
+        pointer-events: none;
     }
 </style>
 <div class="panel-icon" tabindex="0">

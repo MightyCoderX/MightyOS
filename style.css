@@ -61,7 +61,6 @@ html, body
     width: 100%;
     height: var(--panel-height);
     background: #222;
-    padding: 0 5px;
 }
 
 .panel .start-menu
@@ -75,23 +74,35 @@ html, body
 
 .panel #btnStartMenu
 {
-    height: 60%;
-    width: 60%;
-    background: #666;
+    height: 100%;
+    width: 100%;
     outline: none;
     border: none;
+    background: none;
     transition-property: background, border;
     transition-duration: 0.1s;
+    display: grid;
+    place-items: center;
+    user-select: none;
+}
+
+.panel #btnStartMenu img
+{
+    object-fit: scale-down;
+    width: 70%;
+    height: 70%;
+    pointer-events: none;
+    user-select: none;
 }
 
 .panel #btnStartMenu:focus
 {
-    border: 1px solid white;
+    outline: 2px solid white;
+    outline-offset: -2px;
 }
 
 .panel #btnStartMenu:hover
 {
-    background: #00f;
 }
 
 .panel .menu
@@ -105,6 +116,7 @@ html, body
     transform-origin: bottom;
     transform: scaleY(0);
     opacity: 0;
+    outline: none;
     transition-property: transform, opacity;
     transition-duration: 0.2s;
 }
@@ -117,8 +129,8 @@ html, body
 
 .panel panel-icon
 {
-    width: 25px;
-    height: 25px;
+    width: var(--panel-height);
+    height: var(--panel-height);
     margin-right: 10px;
     border: none;
 }

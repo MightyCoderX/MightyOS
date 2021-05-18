@@ -5,6 +5,7 @@ draggableWindowTemplate.innerHTML = `
     .window
     {
         --header-height: 30px;
+        --window-width: 60vw;
     
         position: absolute;
         display: block;
@@ -19,8 +20,8 @@ draggableWindowTemplate.innerHTML = `
         transition-timing-function: ease-in;
         border: 1px solid #222;
         pointer-events: all;
-        width: 40vw;
-        height: 60vh;
+        width: var(--window-width);
+        height: calc(var(--window-width) * 9/16);
     }
     
     .window .header

@@ -12,16 +12,15 @@ body, html
     height: 100%;
 }
 
-#out
+.out
 {
     width: 100%;
-    height: 100%;
     background: #333;
     border: none;
     font-size: 12px;
 }
 
-#out div
+.out div
 {
     padding: 5px 8px;
     border-left: none;
@@ -29,7 +28,7 @@ body, html
     position: relative;
 }
 
-#out div:not(:nth-child(1))
+.out div:not(:nth-child(1))
 {
     margin-top: -1px;
 }
@@ -56,4 +55,30 @@ body, html
     border: 1px solid #b60000;
     font-weight: 400;
     z-index: 1;
+}
+
+.input
+{
+    display: flex;
+    width: 100%;
+    color: white;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+}
+
+.input span
+{
+    font-size: 12px;
+    margin-right: 5px;
+}
+
+.input input[type="text"]
+{
+    width: 100%;
+    background: none;
+    color: white;
+    border: none;
+    outline: none;
+    font-size: 12px;
 }

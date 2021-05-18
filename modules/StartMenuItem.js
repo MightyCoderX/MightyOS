@@ -9,6 +9,7 @@ startMenuItemTemplate.innerHTML = `
         height: 100%;
         overflow: hidden;
     }
+    
     .start-menu-item img
     {
         object-fit: cover;

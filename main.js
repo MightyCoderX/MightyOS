@@ -39,7 +39,7 @@ let oldConsole = {
     log: console.log,
     info: console.info,
     warn: console.warn,
-    error: console.error,
+    error: console.error
 }
 
 function parseArgs(...args)
@@ -91,7 +91,6 @@ console.error = (...args) =>
     let frame = consoleApp.window.shadowRoot.querySelector('iframe');
     frame.contentWindow.error(parseArgs(...args));
 }
-
 
 for(let app of applications)
 {

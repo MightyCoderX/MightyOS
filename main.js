@@ -35,7 +35,7 @@ consoleApp.createWindow();
 applications.add(consoleApp);
 applications.add(new Application('Notepad', 'A basic notepad', './apps/notepad/icon.svg', './apps/notepad/'));
 applications.add(new Application('MightyCoderX', 'My website', 'https://mightycoderx.github.io/images/bg.jpg', 'https://mightycoderx.github.io'));
-
+applications.add(new Application("MightyOS", "this", "/favicon.ico", "https://mightycoderx.github.io/MightyOS/"));
 
 let oldConsole = {
     log: console.log,

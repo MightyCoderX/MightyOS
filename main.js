@@ -31,9 +31,11 @@ btnStartMenu.addEventListener('click', e =>
 let consoleApp = new Application('Console', 'A basic console that logs', './apps/console/icon.svg', './apps/console/');
 consoleApp.createWindow();
 
+
 applications.add(consoleApp);
 applications.add(new Application('Notepad', 'A basic notepad', './apps/notepad/icon.svg', './apps/notepad/'));
 applications.add(new Application('MightyCoderX', 'My website', 'https://mightycoderx.github.io/images/bg.jpg', 'https://mightycoderx.github.io'));
+
 
 let oldConsole = {
     log: console.log,

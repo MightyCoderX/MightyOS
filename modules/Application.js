@@ -17,6 +17,7 @@ class Application
         this.panelIcon = document.createElement('panel-icon');
         this.panelIcon.setAttribute('icon-src', this.iconSrc);
         this.panelIcon.setAttribute('app-name', this.name);
+        this.panelIcon.setAttribute('app-desc', this.desc);
         panel.appendChild(this.panelIcon);
         
         this.window.onclose = () =>

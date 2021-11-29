@@ -105,6 +105,7 @@ class DraggableWindow extends HTMLElement
         super();
         
         this.shadow = this.attachShadow({ mode: 'open' });
+        this.focused = false;
         
         this.shadow.appendChild(draggableWindowTemplate.content.cloneNode(true));
     }
@@ -163,12 +164,35 @@ class DraggableWindow extends HTMLElement
             let height = this.windowFrame.clientHeight;
             this.size = { width, height };
             console.log(this.size);
+            
         }).observe(this.windowFrame);
 
         this.windowFrame.style.width = this.startSize.width + 'px';
         this.windowFrame.style.height = this.startSize.height + 'px';
 
+        // TODO: fix focus on click on the window body
+        // this.body.contentWindow.addEventListener('click', () =>
+        // {
+        //     console.log('Focusing this window', this.title);
+        //     this.focusWindow();
+        // });
+        
+        this.focusWindow();
         this.dragWindow();
+    }
+
+    focusWindow()
+    {
+        Array.from(applications).filter(e => e.window).map(e => e.window).filter(e => e.focused).forEach(w =>
+        {
+            w.focused = false;
+            w.windowFrame.style.zIndex = '0';
+        });
+
+        this.focused = true;
+        this.windowFrame.style.zIndex = '1';
+        
+        this.body.contentWindow.focus();
     }
 
     dragWindow()
@@ -177,6 +201,8 @@ class DraggableWindow extends HTMLElement
         
         let mouseDown = (e) =>
         {
+            this.focusWindow();
+
             let clientX = e.clientX | e.changedTouches?.[0].pageX;
             let clientY = e.clientY | e.changedTouches?.[0].pageY;
             

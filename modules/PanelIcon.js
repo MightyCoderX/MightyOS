@@ -11,13 +11,23 @@ panelAppIconTemplate.innerHTML = `
         place-items: center;
         user-select: none;
     }
-    
-    .panel-icon:hover, panel-icon:active
+
+    .panel-icon::after
     {
-        outline: none;
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        bottom: 0;
+        background-color: white;
+    }
+    
+    .panel-icon:hover
+    {
+        background-color: #fff2;
     }
 
-    .panel-icon:focus
+    .panel-icon:focus-visible
     {
         outline: 2px solid white;
         outline-offset: -2px;
@@ -27,7 +37,8 @@ panelAppIconTemplate.innerHTML = `
     {
         user-select: none;
         object-fit: cover;
-        height: 80%;
+        height: 70%;
+        width: 70%;
         pointer-events: none;
     }
 </style>
@@ -56,7 +67,7 @@ class PanelIcon extends HTMLElement
         panelIconElem.addEventListener('click', e => this.toggleMinimized());
     }
 
-    toggleMinimized(e)
+    toggleMinimized()
     {
         applications.forEach(app =>
         {

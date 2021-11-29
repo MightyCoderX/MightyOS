@@ -103,6 +103,7 @@ html, body
 
 .panel #btnStartMenu:hover
 {
+    background-color: #fff2;
 }
 
 .panel .menu

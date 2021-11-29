@@ -39,6 +39,7 @@ draggableWindowTemplate.innerHTML = `
     {
         pointer-events: none;
         user-select: none;
+        line-height: 0;
     }
     
     .window .header .left-buttons

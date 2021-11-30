@@ -21,6 +21,7 @@ draggableWindowTemplate.innerHTML = `
         pointer-events: all;
         width: var(--window-width);
         height: calc(var(--window-width) * 9/16);
+        resize: both;
     }
 
     .window.minimized
@@ -181,7 +182,12 @@ class DraggableWindow extends HTMLElement
         
         this.focusWindow();
         this.dragWindow();
-        this.resize();
+        // this.resize();
+    }
+
+    get iframe()
+    {
+        return this.body;
     }
 
     focusWindow()

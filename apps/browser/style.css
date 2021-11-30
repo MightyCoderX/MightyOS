@@ -19,7 +19,23 @@ body
     flex-direction: column;
 }
 
-input
+.toolbar
+{
+    display: flex;
+    gap: 0.5rem;
+    padding-left: 0.5rem;
+}
+
+.toolbar button
+{
+    background: transparent;
+    border: none;
+    color: white;
+    outline: none;
+    font-size: 1.3rem;
+}
+
+.toolbar input
 {
     height: 30px;
     background-color: #191919;
@@ -27,6 +43,7 @@ input
     padding: 0.5rem;
     border: none;
     outline: none;
+    width: 100%;
 }
 
 iframe

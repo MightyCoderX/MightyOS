@@ -70,8 +70,9 @@ console.log = (...args) =>
 
     if(!consoleApp.window) return;
 
-    let frame = consoleApp.window.shadowRoot.querySelector('iframe');
-    frame.contentWindow.info(parseArgs(...args));
+    let frame = consoleApp.window.iframe;
+    if(!frame) return;
+    frame?.contentWindow?.info?.(parseArgs(...args));
 }
 
 console.info = (...args) =>
@@ -80,8 +81,9 @@ console.info = (...args) =>
 
     if(!consoleApp.window) return;
 
-    let frame = consoleApp.window.shadowRoot.querySelector('iframe');
-    frame.contentWindow.info(parseArgs(...args));
+    let frame = consoleApp.window.iframe;
+    if(!frame) return;
+    frame?.contentWindow?.info?.(parseArgs(...args));
 }
 
 console.warn = (...args) =>
@@ -90,8 +92,8 @@ console.warn = (...args) =>
 
     if(!consoleApp.window) return;
 
-    let frame = consoleApp.window.shadowRoot.querySelector('iframe');
-    frame.contentWindow.warn(parseArgs(...args));
+    let frame = consoleApp.window.iframe;
+    frame?.contentWindow?.warn?.(parseArgs(...args));
 }
 
 console.error = (...args) =>
@@ -100,8 +102,9 @@ console.error = (...args) =>
 
     if(!consoleApp.window) return;
 
-    let frame = consoleApp.window.shadowRoot.querySelector('iframe');
-    frame.contentWindow.error(parseArgs(...args));
+    let frame = consoleApp.window.iframe;
+    if(!frame) return;
+    frame?.contentWindow?.error?.(parseArgs(...args));
 }
 
 for(let app of applications)

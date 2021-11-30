@@ -29,13 +29,14 @@ btnStartMenu.addEventListener('click', e =>
 });
 
 let consoleApp = new Application('Console', 'A basic console that logs', './apps/console/icon.svg', './apps/console/');
+applications.add(consoleApp);
 consoleApp.createWindow();
 
-
-applications.add(consoleApp);
 applications.add(new Application('Notepad', 'A basic notepad', './apps/notepad/icon.svg', './apps/notepad/'));
+applications.add(new Application('Browser', 'A basic web browser', 'https://mightycoderx.github.io/favicon.ico', './apps/browser'));
+
 applications.add(new Application('MightyCoderX', 'My website', 'https://mightycoderx.github.io/images/bg.jpg', 'https://mightycoderx.github.io'));
-applications.add(new Application("MightyOS", "this", "/favicon.ico", "https://mightycoderx.github.io/MightyOS/"));
+applications.add(new Application('MightyOS', 'this', 'https://mightycoderx.github.io/favicon.ico', './'));
 
 let oldConsole = {
     log: console.log,
@@ -46,7 +47,7 @@ let oldConsole = {
 
 function parseArgs(...args)
 {
-    let res = "";
+    let res = '';
 
     for(let arg of args)
     {
@@ -67,6 +68,8 @@ console.log = (...args) =>
 {
     oldConsole.log(...args);
 
+    if(!consoleApp.window) return;
+
     let frame = consoleApp.window.shadowRoot.querySelector('iframe');
     frame.contentWindow.info(parseArgs(...args));
 }
@@ -74,6 +77,8 @@ console.log = (...args) =>
 console.info = (...args) =>
 {
     oldConsole.info(...args);
+
+    if(!consoleApp.window) return;
 
     let frame = consoleApp.window.shadowRoot.querySelector('iframe');
     frame.contentWindow.info(parseArgs(...args));
@@ -83,6 +88,8 @@ console.warn = (...args) =>
 {
     oldConsole.warn(...args);
 
+    if(!consoleApp.window) return;
+
     let frame = consoleApp.window.shadowRoot.querySelector('iframe');
     frame.contentWindow.warn(parseArgs(...args));
 }
@@ -90,6 +97,9 @@ console.warn = (...args) =>
 console.error = (...args) =>
 {
     oldConsole.error(...args);
+
+    if(!consoleApp.window) return;
+
     let frame = consoleApp.window.shadowRoot.querySelector('iframe');
     frame.contentWindow.error(parseArgs(...args));
 }
@@ -100,5 +110,6 @@ for(let app of applications)
     desktopIcon.setAttribute('icon-src', app.iconSrc);
     desktopIcon.setAttribute('label', app.name);
     desktopIcon.setAttribute('app-name', app.name);
+    desktopIcon.setAttribute('title', app.desc);
     desktop.appendChild(desktopIcon);
 }

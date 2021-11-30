@@ -14,7 +14,6 @@ draggableWindowTemplate.innerHTML = `
         border-radius: 0.5rem 0.5rem 0 0;
         overflow: hidden;
         box-shadow: 0px 0px 5px #222222a4;
-        transform-origin: top left;
         transition-property: transform;
         transition-duration: 0.1s;
         transition-timing-function: ease-in;
@@ -22,6 +21,11 @@ draggableWindowTemplate.innerHTML = `
         pointer-events: all;
         width: var(--window-width);
         height: calc(var(--window-width) * 9/16);
+    }
+
+    .window.minimized
+    {
+        transition-property: transform, top, left;
     }
     
     .window .header
@@ -47,6 +51,7 @@ draggableWindowTemplate.innerHTML = `
         position: relative;
         right: 0;
         display: flex;
+        gap: 5px;
     }
     
     .window .header .left-buttons span
@@ -56,7 +61,6 @@ draggableWindowTemplate.innerHTML = `
         width: 0.9rem;
         height: 0.9rem;
         border-radius: 100rem;
-        margin-left: 5px;
         place-items: center;
     }
     
@@ -114,7 +118,6 @@ class DraggableWindow extends HTMLElement
     connectedCallback()
     {
         this.windowFrame = this.shadow.querySelector('.window');
-        this.windowFrame.position = 'absolute';
         this.header = this.shadow.querySelector('.header');
         this.titleElem = this.shadow.querySelector('.header .title');
         this.btnMinimize = this.shadow.querySelector('.header .minimize');
@@ -128,7 +131,15 @@ class DraggableWindow extends HTMLElement
         
         this.body.addEventListener('load', e =>
         {
-            try{ this.titleElem.innerText = this.body.contentWindow.document.title; } catch(_){}
+            try
+            {
+                this.titleElem.innerText = this.body.contentWindow.document.title;
+            }
+            catch(err)
+            {
+                console.log(err);
+                this.titleElem.innerText = 'Error loading title :/';
+            }
         });
 
         this.startSize = { width: this.windowFrame.clientWidth, height: this.windowFrame.clientHeight };
@@ -145,19 +156,7 @@ class DraggableWindow extends HTMLElement
         this.btnMaximize.addEventListener('click', () => this.maximize());
         this.btnClose.addEventListener('click', () => this.close());
 
-        // this.resizing = '';
-        // document.addEventListener('mousedown', e => this.mouseDown = true);
-        // document.addEventListener('mouseup', e =>
-        // {
-        //     this.mouseDown = false;
-        //     this.resizing = '';
-        // });
-        // document.addEventListener('mouseleave', e =>
-        // {
-        //     this.mouseDown = false;
-        //     this.resizing = '';
-        // });
-        // document.addEventListener('mousemove', e => this.resize(e));
+
         
         new ResizeObserver(() =>
         {
@@ -177,9 +176,12 @@ class DraggableWindow extends HTMLElement
         //     console.log('Focusing this window', this.title);
         //     this.focusWindow();
         // });
+
+        this.header.addEventListener('dblclick', () => this.maximize());
         
         this.focusWindow();
         this.dragWindow();
+        this.resize();
     }
 
     focusWindow()
@@ -276,12 +278,28 @@ class DraggableWindow extends HTMLElement
     {
         if(!this.minimized)
         {
-            this.windowFrame.style.transformOrigin = 'bottom left';
+            let panelIcon = document.querySelector(`.panel panel-icon[app-name=${this.getAttribute('window-title')}]`);
+            let panelIconPos = { 
+                x: panelIcon.getBoundingClientRect().x, 
+                y: panelIcon.getBoundingClientRect().y 
+            };
+
+            this.position.x = this.windowFrame.getBoundingClientRect().x;
+            this.position.y = this.windowFrame.getBoundingClientRect().y;
+
+            this.windowFrame.classList.add('minimized');
+            
+            this.windowFrame.style.transformOrigin = `${panelIconPos.x}px ${panelIconPos.y}px`;
+            this.windowFrame.style.left = `${panelIconPos.x-this.size.width}px`;
+            this.windowFrame.style.top = `${panelIconPos.y}px`;
             this.windowFrame.style.transform = 'scale(0)';
             this.minimized = true;
         }
         else
         {
+            this.windowFrame.classList.remove('minimized');
+            this.windowFrame.style.left = `${this.position.x}px`;
+            this.windowFrame.style.top = `${this.position.y}px`;
             this.windowFrame.style.transform = 'scale(1)';
             this.minimized = false;
         }
@@ -321,61 +339,15 @@ class DraggableWindow extends HTMLElement
         }, dur*1000);
     }
 
-    // resize(e)
+    //TODO: Implement window resizing
+    // resize()
     // {
-    //     if(this.maximized) return;
-    //     if(!this.mouseDown)
-    //     {
-    //         this.resizing = '';
-    //         return;
-    //     }
+    //     let rect = this.windowFrame.getBoundingClientRect();
         
-    //     let left = this.windowFrame.getBoundingClientRect().left;
-    //     let right = this.windowFrame.getBoundingClientRect().right;
-    //     let top = this.windowFrame.getBoundingClientRect().top;
-    //     let bottom = this.windowFrame.getBoundingClientRect().bottom;
-        
-    //     if(this.resizing == '')
+    //     this.windowFrame.addEventListener('mousedown', e =>
     //     {
-    //         if(e.clientX >= left-2 && e.clientX <= left+2)
-    //         {
-    //             this.resizing = 'left';
-    //             document.body.style.cursor = 'ew-resize';
-    //         }
-    //         else if(e.clientX >= right-2 && e.clientX <= right+2)
-    //         {
-    //             this.resizing = 'right';
-    //             document.body.style.cursor = 'ew-resize';
-    //         }
-    //         else if(e.clientY >= top-2 && e.clientY <= top+2)
-    //         {
-    //             this.resizing = 'top';
-    //             document.body.style.cursor = 'ns-resize';
-                
-    //         }
-    //         else if(e.clientY >= bottom-2 && e.clientY <= bottom+2)
-    //         {
-    //             this.resizing = 'bottom';
-    //             document.body.style.cursor = 'ns-resize';
-    //         }
-    //     }
-    //     else
-    //     {
-    //         switch(this.resizing)
-    //         {
-    //             case 'left':
-    //                 this.windowFrame.style.left = e.clientX + 'px';
-    //                 this.windowFrame.style.width = e.clientX + right + 'px';
-    //                 break;
-    //             case 'right':
-    //                 this.windowFrame.style.
-    //                 break;
-    //             case 'top':
-    //                 break;
-    //             case 'bottom':
-    //                 break;
-    //         }
-    //     }
+    //         if()
+    //     });
     // }
 }
 

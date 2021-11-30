@@ -15,7 +15,7 @@ desktopIconTemplate.innerHTML = `
         flex-direction: column;
         align-items: center;
         overflow: hidden;
-        max-height: 100%;
+        /* max-height: 100%; */
         outline: none;
     }
     
@@ -60,9 +60,7 @@ class DesktopIcon extends HTMLElement
     connectedCallback()
     {
         this.shadow.querySelector('.desktop-icon img').src = this.getAttribute('icon-src');
-        this.shadow.querySelector('.desktop-icon img').style.height = this.clientHeight * 0.7 + 'px';
         this.shadow.querySelector('.desktop-icon p').textContent = this.getAttribute('label');
-        this.shadow.querySelector('.desktop-icon').title = this.getAttribute('label');
         this.container = this.shadow.querySelector('.desktop-icon');
         
         this.container.addEventListener('dblclick', e =>

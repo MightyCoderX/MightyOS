@@ -4,6 +4,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    user-select: none;
 }
 
 html, body
@@ -49,6 +50,7 @@ html, body
     width: 100vw;
     height: calc(100% - var(--panel-height));
     pointer-events: none;
+    isolation: isolate;
 }
 
 .panel

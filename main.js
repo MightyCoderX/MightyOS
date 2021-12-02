@@ -33,10 +33,11 @@ applications.add(consoleApp);
 consoleApp.createWindow();
 
 applications.add(new Application('Notepad', 'A basic notepad', './apps/notepad/icon.svg', './apps/notepad/'));
-applications.add(new Application('Browser', 'A basic web browser', 'https://mightycoderx.github.io/favicon.ico', './apps/browser'));
+applications.add(new Application('Browser', 'A basic web browser', './apps/browser/icon.svg', './apps/browser'));
 
 applications.add(new Application('MightyCoderX', 'My website', 'https://mightycoderx.github.io/images/bg.jpg', 'https://mightycoderx.github.io'));
 applications.add(new Application('MightyOS', 'this', 'https://mightycoderx.github.io/favicon.ico', './'));
+applications.add(new Application('LAN-Chat', 'My LAN Chat', 'https://mcx-lan-chat.herokuapp.com/img/icon.svg', 'https://mcx-lan-chat.herokuapp.com'));
 
 let oldConsole = {
     log: console.log,
@@ -115,4 +116,9 @@ for(let app of applications)
     desktopIcon.setAttribute('app-name', app.name);
     desktopIcon.setAttribute('title', app.desc);
     desktop.appendChild(desktopIcon);
+
+    let startMenuItem = document.createElement('start-menu-item');
+    startMenuItem.setAttribute('app-name', app.name);
+    startMenuItem.setAttribute('icon-src', app.iconSrc);
+    menuElem.appendChild(startMenuItem);
 }

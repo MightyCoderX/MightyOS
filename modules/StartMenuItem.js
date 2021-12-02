@@ -4,16 +4,20 @@ startMenuItemTemplate.innerHTML = `
 <style>
     .start-menu-item
     {
-        display: block;
+        display: flex;
         position: relative;
-        height: 100%;
+        height: 3rem;
         overflow: hidden;
+        align-items: center;
+        gap: 0.5rem;
+        padding-inline: 0.5rem;
     }
     
     .start-menu-item img
     {
-        object-fit: cover;
-        height: 100%;
+        object-fit: contain;
+        width: 2rem;
+        aspect-ratio: 1;
     }
 </style>
 <div class="start-menu-item" tabindex="0">

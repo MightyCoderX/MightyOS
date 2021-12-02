@@ -122,6 +122,8 @@ html, body
     outline: none;
     transition-property: transform, opacity;
     transition-duration: 0.2s;
+    display: flex;
+    flex-direction: column;
 }
 
 .panel .menu.show

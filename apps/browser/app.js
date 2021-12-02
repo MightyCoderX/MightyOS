@@ -5,6 +5,13 @@ const btnForward = document.querySelector('button#forward');
 
 const iframe = document.querySelector('iframe');
 
+// iframe.addEventListener('load', () =>
+// {
+//     console.log(iframe.contentWindow.document);
+//     document.title = iframe.contentWindow.document.title;
+// });
+
+
 btnBack.addEventListener('click', () =>
 {
     iframe.contentWindow.history.back();
@@ -25,5 +32,16 @@ txtUrl.addEventListener('keydown', e =>
     if(e.code == 'Enter')
     {
         iframe.src = encodeURI(txtUrl.value);
+        // fetch(encodeURI(txtUrl.value), {
+        //     mode: 'cors',
+        //     headers: {
+        //         'Access-Control-Allow-Origin':'*'
+        //     }
+        // })
+        // .then(res => res.text())
+        // .then(text =>
+        // {
+        //     iframe.srcdoc = text;
+        // });
     }
 });

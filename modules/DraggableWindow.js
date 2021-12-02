@@ -126,7 +126,7 @@ class DraggableWindow extends HTMLElement
         this.btnClose = this.shadow.querySelector('.header .close');
         this.body = this.shadow.querySelector('.window .body iframe');
 
-        // this.titleElem.innerText = this.getAttribute('window-title');
+        this.titleElem.innerText = this.getAttribute('window-title');
         this.body.src = this.getAttribute('content-url');
         this.titleElem.innerText = this.getAttribute('window-title');
         
@@ -139,7 +139,6 @@ class DraggableWindow extends HTMLElement
             catch(err)
             {
                 console.log(err);
-                this.titleElem.innerText = 'Error loading title :/';
             }
         });
 

@@ -8,6 +8,7 @@ const btnClock = document.querySelector('.panel .panel-right #clock');
 setInterval(() =>
 {
     btnClock.innerText = (new Date()).toLocaleTimeString();
+    btnClock.title = (new Date()).toLocaleString();
 }, 500);
 
 const applications = new Set();

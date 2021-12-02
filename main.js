@@ -2,7 +2,13 @@ const btnStartMenu = document.getElementById('btnStartMenu');
 const menuElem = document.querySelector('.menu');
 const desktop = document.querySelector('.desktop');
 const windowsOverlay = document.querySelector('.windows-overlay');
-const panel = document.querySelector('.panel');
+const panelApps = document.querySelector('.panel .panel-apps');
+
+const btnClock = document.querySelector('.panel .panel-right #clock');
+setInterval(() =>
+{
+    btnClock.innerText = (new Date()).toLocaleTimeString();
+}, 500);
 
 const applications = new Set();
 

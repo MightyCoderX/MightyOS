@@ -56,13 +56,14 @@ html, body
 .panel
 {
     position: absolute;
-    display: flex;
-    align-items: center;
     bottom: 0;
     left: 0;
     width: 100%;
     height: var(--panel-height);
     background: #222;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .panel .start-menu
@@ -72,6 +73,30 @@ html, body
     margin-right: 10px;
     display: grid;
     place-items: center;
+}
+
+.panel .panel-apps
+{
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.panel-right
+{
+    display: flex;
+    align-items: center;
+}
+
+.panel-right #clock
+{
+    background: transparent;
+    color: #fff;
+    border: none;
+    outline: none;
+    padding: 0.5rem;
+    font-weight: 500;
+    font-family: monospace;
 }
 
 .panel #btnStartMenu

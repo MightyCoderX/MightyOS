@@ -3,7 +3,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Roboto', sans-serif;
     user-select: none;
 }
 
@@ -40,6 +40,7 @@ html, body
     width: 100vw;
     gap: 10px;
     padding: 10px;
+    background-position: center;
 }
 
 .windows-overlay

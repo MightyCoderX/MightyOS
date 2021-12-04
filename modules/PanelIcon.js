@@ -1,50 +1,50 @@
 const panelAppIconTemplate = document.createElement('template');
 
 panelAppIconTemplate.innerHTML = `
-<style>
-    .panel-icon
-    {
-        display: grid;
-        position: relative;
-        height: 100%;
-        overflow: hidden;
-        place-items: center;
-        user-select: none;
-    }
+    <style>
+        .panel-icon
+        {
+            display: grid;
+            position: relative;
+            height: 100%;
+            overflow: hidden;
+            place-items: center;
+            user-select: none;
+        }
 
-    .panel-icon::after
-    {
-        content: '';
-        position: absolute;
-        width: 100%;
-        height: 2px;
-        bottom: 0;
-        background-color: white;
-    }
-    
-    .panel-icon:hover
-    {
-        background-color: #fff2;
-    }
+        .panel-icon::after
+        {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: 0;
+            background-color: white;
+        }
+        
+        .panel-icon:hover
+        {
+            background-color: #fff2;
+        }
 
-    .panel-icon:focus-visible
-    {
-        outline: 2px solid white;
-        outline-offset: -2px;
-    }
+        .panel-icon:focus-visible
+        {
+            outline: 2px solid white;
+            outline-offset: -2px;
+        }
 
-    .panel-icon img
-    {
-        user-select: none;
-        object-fit: cover;
-        height: 70%;
-        width: 70%;
-        pointer-events: none;
-    }
-</style>
-<div class="panel-icon" tabindex="0">
-    <img />
-</div>
+        .panel-icon img
+        {
+            user-select: none;
+            object-fit: cover;
+            height: 70%;
+            width: 70%;
+            pointer-events: none;
+        }
+    </style>
+    <div class="panel-icon" tabindex="0">
+        <img />
+    </div>
 `;
 
 class PanelIcon extends HTMLElement

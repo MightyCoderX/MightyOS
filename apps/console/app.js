@@ -1,14 +1,32 @@
-const divOut = document.querySelector('.out');
+const divOut = document.querySelector('div.out');
 const jsInput = document.getElementById('jsInput');
 
 let consoleHistory = [];
 let currentIndex = 0;
 let index = 0;
 
+jsInput.focus();
+window.addEventListener('focus', () => jsInput.focus());
+
+new MutationObserver(mutations =>
+{
+    mutations.forEach(mutation =>
+    {
+        if(mutation.type == 'childList')
+        {
+            document.scrollingElement.scrollTo(0, document.scrollingElement.scrollHeight+100);
+        }
+    });
+}).observe(divOut, {
+    childList: true
+});
+
 jsInput.addEventListener('keydown', e =>
 {
     if(e.key == 'Enter')
     {
+        if(!jsInput.value.trim()) return;
+
         let result = undefined;
 
         try
@@ -18,7 +36,7 @@ jsInput.addEventListener('keydown', e =>
         }
         catch(ex)
         {
-            console.dir(ex);
+            console.log(ex);
             error(ex.stack);
         }
         
@@ -27,8 +45,6 @@ jsInput.addEventListener('keydown', e =>
         currentIndex = index;
 
         jsInput.value = '';
-
-        window.scrollTo(0, window.innerHeight);
     }
 
     if(e.key == 'ArrowUp')
@@ -43,11 +59,12 @@ jsInput.addEventListener('keydown', e =>
         index++;
         jsInput.value = consoleHistory[index];
     } 
-    oldConsole.log(index);
+    // oldConsole.log(index);
 });
 
 jsInput.addEventListener('input', e =>
 {
+    e.preventDefault();
     if(!jsInput.value.trim())
     {
         index = currentIndex;
@@ -118,32 +135,27 @@ console.error = (...args) =>
     error(parseArgs(...args));
 }
 
-function info(text)
+function message(type, text)
 {
     let div = document.createElement('div');
 
-    div.classList.add('info');
+    div.classList.add(type);
     div.innerHTML = text;
     
     divOut.appendChild(div);
+}
+
+function info(text)
+{
+    message('info', text);
 }
 
 function warn(text)
 {
-    let div = document.createElement('div');
-    
-    div.classList.add('warning');
-    div.innerHTML = text;
-
-    divOut.appendChild(div);
+    message('warning', text);
 }
 
 function error(text)
 {
-    let div = document.createElement('div');
-    
-    div.classList.add('error');
-    div.innerHTML = text;
-
-    divOut.appendChild(div);
+    message('error', text);
 }

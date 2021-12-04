@@ -1,107 +1,107 @@
 const draggableWindowTemplate = document.createElement('template');
 
 draggableWindowTemplate.innerHTML = `
-<style>
-    .window
-    {
-        --header-height: 30px;
-        --window-width: 60vw;
-    
-        position: absolute;
-        display: block;
-        top: 20px;
-        left: 100px;
-        border-radius: 0.5rem 0.5rem 0 0;
-        overflow: hidden;
-        box-shadow: 0px 0px 5px #222222a4;
-        transition-property: transform;
-        transition-duration: 0.1s;
-        transition-timing-function: ease-in;
-        border: 1px solid #222;
-        pointer-events: all;
-        width: var(--window-width);
-        height: calc(var(--window-width) * 9/16);
-        resize: both;
-    }
+    <style>
+        .window
+        {
+            --header-height: 30px;
+            --window-width: 60vw;
+        
+            position: absolute;
+            display: block;
+            top: 20px;
+            left: 100px;
+            border-radius: 0.5rem 0.5rem 0 0;
+            overflow: hidden;
+            box-shadow: 0px 0px 5px #222222a4;
+            transition-property: transform;
+            transition-duration: 0.1s;
+            transition-timing-function: ease-in;
+            border: 1px solid #222;
+            pointer-events: all;
+            width: var(--window-width);
+            height: calc(var(--window-width) * 9/16);
+            resize: both;
+        }
 
-    .window.minimized
-    {
-        transition-property: transform, top, left;
-    }
-    
-    .window .header
-    {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 0.6rem;
-        background: #222;
-        height: var(--header-height);
-        font-size: 14px;
-    }
-    
-    .window .header .title
-    {
-        pointer-events: none;
-        user-select: none;
-        line-height: 0;
-    }
-    
-    .window .header .left-buttons
-    {
-        position: relative;
-        right: 0;
-        display: flex;
-        gap: 5px;
-    }
-    
-    .window .header .left-buttons span
-    {
-        position: relative;
-        display: grid;
-        width: 0.9rem;
-        height: 0.9rem;
-        border-radius: 100rem;
-        place-items: center;
-    }
-    
-    .window .header .left-buttons .minimize
-    {
-        background: orange;
-    }
-    
-    .window .header .left-buttons .maximize
-    {
-        background: green;
-    }
-    
-    .window .header .left-buttons .close
-    {
-        background: red;
-    }
-    
-    .window .body
-    {
-        background: #333;
-        height: calc(100% - var(--header-height));
-        width: 100%;
-        user-select: none;
-    }
-</style>
-<div class="window">
-    <div class="header">
-        <span class="title"></span>
+        .window.minimized
+        {
+            transition-property: transform, top, left;
+        }
+        
+        .window .header
+        {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 0.6rem;
+            background: #222;
+            height: var(--header-height);
+            font-size: 14px;
+        }
+        
+        .window .header .title
+        {
+            pointer-events: none;
+            user-select: none;
+            line-height: 0;
+        }
+        
+        .window .header .left-buttons
+        {
+            position: relative;
+            right: 0;
+            display: flex;
+            gap: 5px;
+        }
+        
+        .window .header .left-buttons span
+        {
+            position: relative;
+            display: grid;
+            width: 0.9rem;
+            height: 0.9rem;
+            border-radius: 100rem;
+            place-items: center;
+        }
+        
+        .window .header .left-buttons .minimize
+        {
+            background: orange;
+        }
+        
+        .window .header .left-buttons .maximize
+        {
+            background: green;
+        }
+        
+        .window .header .left-buttons .close
+        {
+            background: red;
+        }
+        
+        .window .body
+        {
+            background: #333;
+            height: calc(100% - var(--header-height));
+            width: 100%;
+            user-select: none;
+        }
+    </style>
+    <div class="window">
+        <div class="header">
+            <span class="title"></span>
 
-        <div class="left-buttons"> 
-            <span class="minimize"></span>
-            <span class="maximize"></span>
-            <span class="close"></span>
+            <div class="left-buttons"> 
+                <span class="minimize"></span>
+                <span class="maximize"></span>
+                <span class="close"></span>
+            </div>
+        </div>
+        <div class="body">
+            <iframe src="" frameborder="0" style="width: 100%; height: 100%;"></iframe>
         </div>
     </div>
-    <div class="body">
-        <iframe src="" frameborder="0" style="width: 100%; height: 100%;"></iframe>
-    </div>
-</div>
 `;
 
 class DraggableWindow extends HTMLElement

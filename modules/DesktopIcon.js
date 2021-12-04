@@ -1,50 +1,50 @@
 const desktopIconTemplate = document.createElement('template');
 
 desktopIconTemplate.innerHTML = `
-<style>
-    *
-    {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
+    <style>
+        *
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    .desktop-icon
-    {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        overflow: hidden;
-        /* max-height: 100%; */
-        outline: none;
-    }
-    
-    .desktop-icon:hover,
-    .desktop-icon:focus
-    {
-        outline: 1px solid #0ffa;
-        background: #0ff5;
-    }
-    
-    .desktop-icon img
-    {
-        object-fit: cover;
-        width: 80%;
-    }
-    
-    .desktop-icon p
-    {
-        font-size: 12px;
-        margin-top: 5px;
-        text-align: center;
-        word-break: break-word;
-        text-overflow: ellipsis;
-    }
-</style>
-<div class="desktop-icon" tabindex="0">
-    <img />
-    <p></p>
-</div>
+        .desktop-icon
+        {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: hidden;
+            /* max-height: 100%; */
+            outline: none;
+        }
+        
+        .desktop-icon:hover,
+        .desktop-icon:focus
+        {
+            outline: 1px solid #0ffa;
+            background: #0ff5;
+        }
+        
+        .desktop-icon img
+        {
+            object-fit: cover;
+            width: 80%;
+        }
+        
+        .desktop-icon p
+        {
+            font-size: 12px;
+            margin-top: 5px;
+            text-align: center;
+            word-break: break-word;
+            text-overflow: ellipsis;
+        }
+    </style>
+    <div class="desktop-icon" tabindex="0">
+        <img />
+        <p></p>
+    </div>
 `;
 
 class DesktopIcon extends HTMLElement

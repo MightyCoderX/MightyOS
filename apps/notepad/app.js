@@ -1,11 +1,18 @@
 const txtEditor = document.getElementById('txtEditor');
 
-window.addEventListener('blur', e =>
-{
-    txtEditor.focus();
-});
+txtEditor.focus();
+window.addEventListener('focus', () => txtEditor.focus());
 
-txtEditor.addEventListener('blur', e =>
+if(localStorage.getItem('notepad'))
 {
-    txtEditor.focus();
+    txtEditor.value = localStorage.getItem('notepad');
+}
+
+window.addEventListener('keydown', e =>
+{
+    if(e.key === 's' && e.ctrlKey)
+    {
+        e.preventDefault();
+        localStorage.setItem('notepad', txtEditor.value);
+    }
 });

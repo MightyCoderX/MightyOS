@@ -1,39 +1,39 @@
 const startMenuItemTemplate = document.createElement('template');
 
 startMenuItemTemplate.innerHTML = `
-<style>
-    .start-menu-item
-    {
-        display: flex;
-        position: relative;
-        height: 3rem;
-        overflow: hidden;
-        align-items: center;
-        gap: 0.5rem;
-        padding-inline: 0.5rem;
-    }
+    <style>
+        .start-menu-item
+        {
+            display: flex;
+            position: relative;
+            height: 3rem;
+            overflow: hidden;
+            align-items: center;
+            gap: 0.5rem;
+            padding-inline: 0.5rem;
+        }
 
-    .start-menu-item:hover
-    {
-        background-color: #fff2;
-    }
+        .start-menu-item:hover
+        {
+            background-color: #fff2;
+        }
 
-    .start-menu-item:active
-    {
-        background-color: #ffffff05;
-    }
-    
-    .start-menu-item img
-    {
-        object-fit: contain;
-        width: 2rem;
-        aspect-ratio: 1;
-    }
-</style>
-<div class="start-menu-item" tabindex="0">
-    <img />
-    <span class="label"></span>
-</div>
+        .start-menu-item:active
+        {
+            background-color: #ffffff05;
+        }
+        
+        .start-menu-item img
+        {
+            object-fit: contain;
+            width: 2rem;
+            aspect-ratio: 1;
+        }
+    </style>
+    <div class="start-menu-item" tabindex="0">
+        <img />
+        <span class="label"></span>
+    </div>
 `;
 
 class StartMenuItem extends HTMLElement

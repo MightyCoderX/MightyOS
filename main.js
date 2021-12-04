@@ -13,6 +13,57 @@ setInterval(() =>
 
 const applications = new Set();
 
+if(localStorage.getItem('desktop-bg'))
+{
+    desktop.style.backgroundImage = `url('${localStorage.getItem('desktop-bg')}')`;
+}
+
+desktop.addEventListener('contextmenu', e =>
+{
+    e.preventDefault();
+    const contextMenu = new ContextMenu([
+        {
+            label: 'Set Desktop Background',
+            action()
+            {
+                const fileInput = document.createElement('input');
+                fileInput.type = 'file';
+                fileInput.accept = 'image/*';
+                fileInput.style.display = 'none';
+
+                document.body.appendChild(fileInput);
+
+                fileInput.click();
+                fileInput.addEventListener('change', () =>
+                {
+                    const image = fileInput.files[0];
+                    const reader = new FileReader();
+
+                    reader.readAsDataURL(image);
+
+                    reader.addEventListener('load', () =>
+                    {
+                        desktop.style.backgroundImage = `url('${reader.result}')`;
+                        localStorage.setItem('desktop-bg', reader.result);
+                        fileInput.remove();
+                    });
+                    
+                });
+
+            }
+        },
+        {
+            label: 'Refresh',
+            action: createDesktopIcons
+        }
+    ], { x: e.clientX, y: e.clientY });
+
+    document.querySelector('context-menu')?.remove?.();
+    document.body.appendChild(contextMenu);
+});
+
+
+
 btnStartMenu.addEventListener('click', e =>
 {
     if(!menuElem.classList.contains('show'))
@@ -37,7 +88,6 @@ btnStartMenu.addEventListener('click', e =>
 
 let consoleApp = new Application('Console', 'A basic console that logs', './apps/console/icon.svg', './apps/console/');
 applications.add(consoleApp);
-consoleApp.createWindow();
 
 applications.add(new Application('Notepad', 'A basic notepad', './apps/notepad/icon.svg', './apps/notepad/'));
 applications.add(new Application('Browser', 'A basic web browser', './apps/browser/icon.svg', './apps/browser'));
@@ -115,17 +165,30 @@ console.error = (...args) =>
     frame?.contentWindow?.error?.(parseArgs(...args));
 }
 
-for(let app of applications)
+function createDesktopIcons()
 {
-    let desktopIcon = document.createElement('desktop-icon');
-    desktopIcon.setAttribute('icon-src', app.iconSrc);
-    desktopIcon.setAttribute('label', app.name);
-    desktopIcon.setAttribute('app-name', app.name);
-    desktopIcon.setAttribute('title', app.desc);
-    desktop.appendChild(desktopIcon);
-
-    let startMenuItem = document.createElement('start-menu-item');
-    startMenuItem.setAttribute('app-name', app.name);
-    startMenuItem.setAttribute('icon-src', app.iconSrc);
-    menuElem.appendChild(startMenuItem);
+    desktop.innerHTML = '';
+    for(let app of applications)
+    {
+        let desktopIcon = document.createElement('desktop-icon');
+        desktopIcon.setAttribute('icon-src', app.iconSrc);
+        desktopIcon.setAttribute('label', app.name);
+        desktopIcon.setAttribute('app-name', app.name);
+        desktopIcon.setAttribute('title', app.desc);
+        desktop.appendChild(desktopIcon);
+    }
 }
+
+function createStartMenuItems()
+{
+    for(let app of applications)
+    {
+        let startMenuItem = document.createElement('start-menu-item');
+        startMenuItem.setAttribute('app-name', app.name);
+        startMenuItem.setAttribute('icon-src', app.iconSrc);
+        menuElem.appendChild(startMenuItem);
+    }
+}
+
+createDesktopIcons();
+createStartMenuItems();

@@ -22,6 +22,7 @@ contextMenuTemplate.innerHTML = `
             overflow: hidden;
             border-radius: 0.3rem;
             font-size: 14px;
+            outline: none;
         }
 
         .context-menu li
@@ -36,7 +37,7 @@ contextMenuTemplate.innerHTML = `
             background-color: #fff2;
         }
     </style>
-    <ul class="context-menu">
+    <ul class="context-menu" tabindex="-1">
 
     </ul>
 `;
@@ -59,6 +60,7 @@ class ContextMenu extends HTMLElement
     connectedCallback()
     {
         const contextMenuElem = this.shadow.querySelector('ul.context-menu');
+        contextMenuElem.focus();
         
         contextMenuElem.style.left = `${this.position.x}px`
         contextMenuElem.style.top = `${this.position.y}px`
@@ -74,12 +76,12 @@ class ContextMenu extends HTMLElement
                 item.action();
                 this.remove();
             }
-
+            
             li.addEventListener('click', callAction);
             li.addEventListener('contextmenu', callAction);
         });
 
-        window.addEventListener('click', e => this.remove());
+        contextMenuElem.addEventListener('blur', () => this.remove());
     }
 }
 

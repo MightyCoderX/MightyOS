@@ -28,8 +28,8 @@ desktopIconTemplate.innerHTML = `
         
         .desktop-icon img
         {
-            object-fit: cover;
             width: 80%;
+            aspect-ratio: 1;
         }
         
         .desktop-icon p
@@ -39,6 +39,7 @@ desktopIconTemplate.innerHTML = `
             text-align: center;
             word-break: break-word;
             text-overflow: ellipsis;
+            filter: drop-shadow(0 0 0.2rem #000);
         }
     </style>
     <div class="desktop-icon" tabindex="0">

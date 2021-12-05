@@ -14,6 +14,7 @@ html, body
     overflow: hidden;
     width: 100%;
     height: 100%;
+    -moz-font-smoothing: grayscale;
 }
 
 .noselect
@@ -138,6 +139,7 @@ html, body
 {
     height: 60vh;
     width: 25vw;
+    min-width: max-content;
     position: absolute;
     bottom: var(--panel-height);
     left: 0;

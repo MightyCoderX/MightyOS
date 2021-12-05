@@ -10,7 +10,7 @@ startMenuItemTemplate.innerHTML = `
             overflow: hidden;
             align-items: center;
             gap: 0.5rem;
-            padding-inline: 0.5rem;
+            padding: 0 2rem 0 0.5rem; 
         }
 
         .start-menu-item:hover
@@ -25,7 +25,6 @@ startMenuItemTemplate.innerHTML = `
         
         .start-menu-item img
         {
-            object-fit: contain;
             width: 2rem;
             aspect-ratio: 1;
         }

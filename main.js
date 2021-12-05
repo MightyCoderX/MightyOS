@@ -34,21 +34,20 @@ desktop.addEventListener('contextmenu', e =>
                 document.body.appendChild(fileInput);
 
                 fileInput.click();
-                fileInput.addEventListener('change', () =>
+                fileInput.addEventListener('input', () =>
                 {
                     const image = fileInput.files[0];
                     const reader = new FileReader();
-
+                    
                     reader.readAsDataURL(image);
-
+                    
                     reader.addEventListener('load', () =>
                     {
                         desktop.style.backgroundImage = `url('${reader.result}')`;
                         localStorage.setItem('desktop-bg', reader.result);
-                        fileInput.remove();
                     });
-                    
                 });
+                fileInput.remove();
 
             }
         },

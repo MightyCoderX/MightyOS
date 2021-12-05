@@ -143,9 +143,13 @@ class DraggableWindow extends HTMLElement
         });
 
         this.startSize = { width: this.windowFrame.clientWidth, height: this.windowFrame.clientHeight };
-        this.position = { x: 100, y: 100 };
         this.size = this.startSize;
-        
+
+        this.position = { 
+            x: window.innerWidth/2-this.size.width/2, 
+            y: window.innerHeight/2-this.size.height/1.5
+        };
+
         this.maximized = false;
         this.minimized = false;
         this.headerMouseDown = false;
@@ -163,7 +167,7 @@ class DraggableWindow extends HTMLElement
             let width = this.windowFrame.clientWidth;
             let height = this.windowFrame.clientHeight;
             this.size = { width, height };
-            console.log(this.size);
+            // console.log(this.size);
             
         }).observe(this.windowFrame);
 
@@ -182,6 +186,18 @@ class DraggableWindow extends HTMLElement
         this.focusWindow();
         this.dragWindow();
         // this.resize();
+    }
+
+    set position({x, y})
+    {
+        this._position = {x, y};
+        this.windowFrame.style.left = `${x}px`;
+        this.windowFrame.style.top = `${y}px`;
+    }
+
+    get position()
+    {
+        return this._position;
     }
 
     get iframe()
@@ -218,6 +234,10 @@ class DraggableWindow extends HTMLElement
             windowMouseX = clientX - this.windowFrame.offsetLeft;
             windowMouseY = clientY - this.windowFrame.offsetTop;
             this.body.style.pointerEvents = 'none';
+            
+            window.addEventListener('mouseup', mouseUp);
+            window.addEventListener('touchend', mouseUp);
+            window.addEventListener('touchcancel', mouseUp);
         }
     
         this.header.addEventListener('mousedown', mouseDown);
@@ -230,10 +250,6 @@ class DraggableWindow extends HTMLElement
             this.header.removeEventListener('mousemove', windowDrag);
             this.body.style.pointerEvents = 'all';
         }
-        
-        this.header.addEventListener('mouseup', mouseUp);
-        this.header.addEventListener('touchend', mouseUp);
-        this.header.addEventListener('touchcancel', mouseUp);
 
         
         let mouseMove = (e) =>
@@ -247,8 +263,8 @@ class DraggableWindow extends HTMLElement
                 {
                     this.maximize();
                     
-                    this.windowFrame.style.left = clientX - this.startSize.width/2 + 'px';
-                    this.windowFrame.style.top = clientY - this.header.offsetHeight/2 + 'px';
+                    this.position = { x: clientX - this.startSize.width/2, y: clientY - this.header.offsetHeight/2 };
+
                     windowMouseX = clientX - this.windowFrame.offsetLeft;
                     windowMouseY = clientY - this.windowFrame.offsetTop;
                 }
@@ -274,8 +290,7 @@ class DraggableWindow extends HTMLElement
     
         let windowDrag = (clientX, clientY) =>
         {
-            this.windowFrame.style.left = clientX - windowMouseX + 'px';
-            this.windowFrame.style.top = clientY - windowMouseY + 'px';
+            this.position = { x: clientX - windowMouseX, y: clientY - windowMouseY };
         }
     }
 
@@ -316,15 +331,20 @@ class DraggableWindow extends HTMLElement
         {
             this.windowFrame.style.top = 0;
             this.windowFrame.style.left = 0;
+
+            this.startSize = { width: this.windowFrame.clientWidth, height: this.windowFrame.clientHeight };
+            
             this.windowFrame.style.width = '100%';
             this.windowFrame.style.height = '100%';
             this.windowFrame.style.borderRadius = 0;
+            
             this.maximized = true;
         }
         else
         {
             this.windowFrame.style.width = this.startSize.width+'px';
             this.windowFrame.style.height = this.startSize.height+'px';
+            this.position = { x: this._position.x, y: this.position.y };
             this.windowFrame.style.borderRadius = '';
             this.maximized = false;
         }

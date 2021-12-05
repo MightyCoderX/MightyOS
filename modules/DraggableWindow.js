@@ -2,6 +2,14 @@ const draggableWindowTemplate = document.createElement('template');
 
 draggableWindowTemplate.innerHTML = `
     <style>
+        *
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+        }
+
         .window
         {
             --header-height: 30px;
@@ -147,7 +155,7 @@ class DraggableWindow extends HTMLElement
 
         this.position = { 
             x: window.innerWidth/2-this.size.width/2, 
-            y: window.innerHeight/2-this.size.height/1.5
+            y: 100
         };
 
         this.maximized = false;

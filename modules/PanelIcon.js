@@ -2,6 +2,14 @@ const panelAppIconTemplate = document.createElement('template');
 
 panelAppIconTemplate.innerHTML = `
     <style>
+        *
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+        }
+
         .panel-icon
         {
             display: grid;

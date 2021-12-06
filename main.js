@@ -1,4 +1,6 @@
 const btnStartMenu = document.getElementById('btnStartMenu');
+const btnShutdown = document.getElementById('btnShutdown');
+const btnRestart = document.getElementById('btnRestart');
 const menuElem = document.querySelector('.menu');
 const desktop = document.querySelector('.desktop');
 const windowsOverlay = document.querySelector('.windows-overlay');
@@ -8,7 +10,7 @@ const btnClock = document.querySelector('.panel .panel-right #clock');
 setInterval(() =>
 {
     btnClock.innerText = (new Date()).toLocaleTimeString();
-    btnClock.title = (new Date()).toLocaleString();
+    btnClock.title = (new Date()).toLocaleDateString();
 }, 500);
 
 const applications = new Set();
@@ -84,6 +86,11 @@ btnStartMenu.addEventListener('click', e =>
         menuElem.classList.remove('show');
     }
 });
+
+btnRestart.addEventListener('click', () => location.reload());
+btnShutdown.addEventListener('click', () => window.close());
+
+
 
 let consoleApp = new Application('Console', 'A basic console that logs', './apps/console/icon.svg', './apps/console/');
 applications.add(consoleApp);
@@ -180,12 +187,13 @@ function createDesktopIcons()
 
 function createStartMenuItems()
 {
+    const startMenuAppList = menuElem.querySelector('.app-list');
     for(let app of applications)
     {
         let startMenuItem = document.createElement('start-menu-item');
         startMenuItem.setAttribute('app-name', app.name);
         startMenuItem.setAttribute('icon-src', app.iconSrc);
-        menuElem.appendChild(startMenuItem);
+        startMenuAppList.appendChild(startMenuItem);
     }
 }
 

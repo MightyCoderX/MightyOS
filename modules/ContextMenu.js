@@ -65,17 +65,18 @@ class ContextMenu extends HTMLElement
         
         contextMenuElem.style.left = `${this.position.x}px`
         contextMenuElem.style.top = `${this.position.y}px`
+
         this.items.forEach(item =>
         {
             const li = document.createElement('li');
             li.innerText = item.label;
             contextMenuElem.appendChild(li);
 
-            const callAction = e =>
+            const callAction = async e =>
             {
                 e.preventDefault();
                 item.action();
-                this.remove();
+                try{ this.remove(); } catch (_){}
             }
             
             li.addEventListener('click', callAction);

@@ -27,10 +27,12 @@ desktopIconTemplate.innerHTML = `
             background: #0ff5;
         }
         
-        .desktop-icon img
+        .desktop-icon .img
         {
-            width: 80%;
+            width: 75%;
             aspect-ratio: 1;
+            background-repeat: no-repeat;
+            background-size: cover;
         }
         
         .desktop-icon p
@@ -44,7 +46,7 @@ desktopIconTemplate.innerHTML = `
         }
     </style>
     <div class="desktop-icon" tabindex="0">
-        <img />
+        <div class="img"></div>
         <p></p>
     </div>
 `;
@@ -61,7 +63,8 @@ class DesktopIcon extends HTMLElement
     
     connectedCallback()
     {
-        this.shadow.querySelector('.desktop-icon img').src = this.getAttribute('icon-src');
+        this.draggable = 'true';
+        this.shadow.querySelector('.desktop-icon .img').style.backgroundImage = `url('${this.getAttribute('icon-src')}')`;
         this.shadow.querySelector('.desktop-icon p').textContent = this.getAttribute('label');
         this.container = this.shadow.querySelector('.desktop-icon');
         

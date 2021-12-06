@@ -17,6 +17,12 @@ html, body
     -moz-font-smoothing: grayscale;
 }
 
+span[class^="material-icons"]
+{
+    display: block;
+    line-height: 1;
+}
+
 :root
 {
     --panel-height: 35px;
@@ -61,7 +67,7 @@ html, body
 .panel .start-menu
 {
     height: 100%;
-    width: var(--panel-height);
+    aspect-ratio: 1;
     margin-right: 10px;
     display: grid;
     place-items: center;
@@ -94,7 +100,7 @@ html, body
 .panel #btnStartMenu
 {
     height: 100%;
-    width: 100%;
+    aspect-ratio: 1;
     outline: none;
     border: none;
     background: none;
@@ -107,9 +113,8 @@ html, body
 
 .panel #btnStartMenu img
 {
-    object-fit: scale-down;
-    width: 70%;
-    height: 70%;
+    width: 85%;
+    aspect-ratio: 1;
     pointer-events: none;
     user-select: none;
 }
@@ -141,7 +146,40 @@ html, body
     transition-property: transform, opacity;
     transition-duration: 0.2s;
     display: flex;
+}
+
+.panel .menu aside
+{
+    width: max-content;
+    display: flex;
     flex-direction: column;
+    justify-content: flex-end;
+}
+
+.panel .menu aside button
+{
+    width: 35px;
+    aspect-ratio: 1;
+    background: transparent;
+    color: white;
+    border: none;
+    display: grid;
+    place-items: center;
+}
+
+.panel .menu aside button span
+{
+    font-size: 20px;
+}
+
+.panel .menu aside button:hover
+{
+    background: #fff2;
+}
+
+.panel .menu .app-list
+{
+    width: 100%;
 }
 
 .panel .menu.show

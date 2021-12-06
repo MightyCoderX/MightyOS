@@ -41,17 +41,16 @@ panelAppIconTemplate.innerHTML = `
             outline-offset: -2px;
         }
 
-        .panel-icon img
+        .panel-icon .img
         {
-            user-select: none;
-            object-fit: cover;
             height: 70%;
-            width: 70%;
-            pointer-events: none;
+            aspect-ratio: 1;
+            background-repeat: no-repeat;
+            background-size: cover;
         }
     </style>
     <div class="panel-icon" tabindex="0">
-        <img />
+        <div class="img"></div>
     </div>
 `;
 
@@ -67,7 +66,7 @@ class PanelIcon extends HTMLElement
 
     connectedCallback()
     {
-        this.shadow.querySelector('.panel-icon img').src = this.getAttribute('icon-src');
+        this.shadow.querySelector('.panel-icon .img').style.backgroundImage = `url('${this.getAttribute('icon-src')}')`;
 
         let panelIconElem = this.shadow.querySelector('.panel-icon');
         

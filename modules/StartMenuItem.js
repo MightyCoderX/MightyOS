@@ -23,14 +23,16 @@ startMenuItemTemplate.innerHTML = `
             background-color: #ffffff05;
         }
         
-        .start-menu-item img
+        .start-menu-item .img
         {
             width: 2rem;
             aspect-ratio: 1;
+            background-repeat: no-repeat;
+            background-size: cover;
         }
     </style>
     <div class="start-menu-item" tabindex="0">
-        <img />
+        <div class="img"></div>
         <span class="label"></span>
     </div>
 `;
@@ -47,7 +49,7 @@ class StartMenuItem extends HTMLElement
 
     connectedCallback()
     {
-        this.shadow.querySelector('img').src = this.getAttribute('icon-src');
+        this.shadow.querySelector('.img').style.backgroundImage = `url('${this.getAttribute('icon-src')}')`;
         this.shadow.querySelector('.label').innerHTML = this.getAttribute('app-name');
         this.shadow.querySelector('.label').title = this.getAttribute('app-name');
 

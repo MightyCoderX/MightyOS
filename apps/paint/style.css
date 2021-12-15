@@ -53,14 +53,23 @@ button:hover
     display: grid;
     gap: 1rem;
     place-items: center;
-    pointer-events: all;
+    pointer-events: none;
     transition: opacity 0.2s ease;
+}
+
+.toolbar *
+{
+    pointer-events: all;
 }
 
 .toolbar.hidden
 {
-    pointer-events: none;
     opacity: 0.2;
+}
+
+.toolbar.hidden *
+{
+    pointer-events: none;
 }
 
 .colors

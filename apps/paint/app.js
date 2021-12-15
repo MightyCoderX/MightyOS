@@ -30,7 +30,7 @@ btnDownload.addEventListener('click', e =>
     //TODO: Fix download button
     const aElem = document.createElement('a');
     aElem.href = canvas.toDataURL();
-    aElem.download = 'image.png';
+    aElem.download = 'image.jpg';
     document.body.appendChild(aElem);
     aElem.click();
     aElem.remove();
@@ -64,9 +64,9 @@ let posX, posY;
 // }
 
 canvas.addEventListener('mousemove', draw);
-canvas.addEventListener('contextmenu', mouseUp);
 canvas.addEventListener('mousedown', e =>
 {
+    if(e.button != 0) return;
     toolbar.classList.add('hidden');
     down = true;
     ctx.lineCap = 'round';

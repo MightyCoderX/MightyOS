@@ -64,13 +64,24 @@ let posX, posY;
 // }
 
 canvas.addEventListener('mousemove', draw);
-canvas.addEventListener('mousedown', e =>
+canvas.addEventListener('touchmove', draw);
+
+canvas.addEventListener('mousedown', mouseDown);
+canvas.addEventListener('touchstart', mouseDown)
+
+window.addEventListener('mouseup', mouseUp);
+canvas.addEventListener('mouseleave', mouseUp);
+window.addEventListener('touchcancel', mouseUp);
+canvas.addEventListener('touchend', mouseUp);
+
+function mouseDown(e)
 {
     if(e.button != 0) return;
     toolbar.classList.add('hidden');
     down = true;
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
+    ctx.lineWidth = size;
 
     if(tool == tools.circle)
     {
@@ -83,9 +94,7 @@ canvas.addEventListener('mousedown', e =>
         ctx.lineTo(posX, posY);
         ctx.stroke();
     }
-});
-window.addEventListener('mouseup', mouseUp);
-canvas.addEventListener('mouseleave', mouseUp);
+}
 
 function mouseUp()
 {

@@ -97,6 +97,7 @@ applications.add(consoleApp);
 
 applications.add(new Application('Notepad', 'A basic notepad', './apps/notepad/icon.svg', './apps/notepad/'));
 applications.add(new Application('Browser', 'A basic web browser', './apps/browser/icon.svg', './apps/browser'));
+applications.add(new Application('Paint', 'A basic painting app', './apps/paint/icon.ico', './apps/paint'));
 
 applications.add(new Application('MightyCoderX', 'My website', 'https://mightycoderx.github.io/images/bg.jpg', 'https://mightycoderx.github.io'));
 applications.add(new Application('MightyOS', 'this', 'https://mightycoderx.github.io/favicon.ico', './'));

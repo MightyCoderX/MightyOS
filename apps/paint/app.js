@@ -27,6 +27,7 @@ document.body.prepend(canvas);
 
 btnDownload.addEventListener('click', e =>
 {
+    //TODO: Fix download button
     const aElem = document.createElement('a');
     aElem.href = canvas.toDataURL();
     aElem.download = 'image.png';

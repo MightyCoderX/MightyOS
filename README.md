@@ -10,5 +10,6 @@
 - [ ] ...
 
 ## Todo
-- [ ] Prevent Image Dragging
+- [x] Prevent Image Dragging
+- [ ] Work on draggable desktop icons
 

@@ -242,6 +242,7 @@ class DraggableWindow extends HTMLElement
             windowMouseX = clientX - this.windowFrame.offsetLeft;
             windowMouseY = clientY - this.windowFrame.offsetTop;
             this.body.style.pointerEvents = 'none';
+
             
             window.addEventListener('mouseup', mouseUp);
             window.addEventListener('touchend', mouseUp);

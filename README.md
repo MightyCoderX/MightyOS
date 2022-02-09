@@ -11,6 +11,6 @@
 
 ## Todo
 - [x] Prevent Image Dragging
-- [ ] Use details element to display objects in the Console app
+- [ ] Fix console rendering of complex objects using details elements if needed
 - [ ] Work on draggable desktop icons
 

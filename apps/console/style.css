@@ -22,7 +22,7 @@ body, html
 
 .out div
 {
-    padding: 5px 8px;
+    padding: 5px;
     border-left: none;
     border-right: none;
     position: relative;
@@ -81,4 +81,37 @@ body, html
     border: none;
     outline: none;
     font-size: 12px;
+}
+
+.out :where([data-primitive])
+{
+    color: #9980ff; 
+}
+
+.out :where([data-string])
+{
+    color: #35d4c7;
+}
+
+.out :where([data-function])
+{
+    font-style: italic;
+}
+
+.out :where([data-function-prefix])
+{
+    color: #f29766;
+}
+
+.out :where([data-input-prefix])
+{
+    margin-right: 0.5em;
+    color: #777;
+}
+
+.out :where([data-return-value-prefix])
+{
+    margin-right: 0.5em;
+    color: #777;
+    letter-spacing: -3px;
 }

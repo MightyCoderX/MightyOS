@@ -5,6 +5,8 @@ let consoleHistory = [];
 let currentIndex = 0;
 let index = 0;
 
+let oldConsole = { ...console };
+
 jsInput.focus();
 window.addEventListener('focus', () => jsInput.focus());
 
@@ -27,17 +29,18 @@ jsInput.addEventListener('keydown', e =>
     {
         if(!jsInput.value.trim()) return;
 
+        printInput(jsInput.value);
+        
         let result = undefined;
 
         try
         {
-            result = eval(jsInput.value);
-            info(parseArgs(result));
+            result = eval("(" + jsInput.value + ")");
+            printOutput('info', `<span data-return-value><span data-return-value-prefix>&lt;&middot;</span>${parseArgs(result)}</span>`);
         }
-        catch(ex)
+        catch(err)
         {
-            console.log(ex);
-            error(ex.stack);
+            error(err.stack);
         }
         
         consoleHistory.push(jsInput.value);
@@ -71,11 +74,95 @@ jsInput.addEventListener('input', e =>
     }
 });
 
-let oldConsole = {
-    log: console.log,
-    info: console.info,
-    warn: console.warn,
-    error: console.error,
+function displayUndefined()
+{
+    return `<span data-undefined>${undefined}</span>`;
+}
+
+function displayPrimitive(value)
+{
+    return `<span data-primitive>${value}</span>`;
+}
+
+function displayString(str)
+{
+    return `<span data-string>"${str}"</span>`;
+}
+
+function displayFunction(func)
+{
+    return `<span data-function><span data-function-prefix>ƒ</span> ${func.toString().replace(/^function /, "").replace(/\r\n/gi, "<br>")}</span>`;
+}
+
+// function displayObject(object, level)
+// {
+//     let detailsElem = `<details>
+//     ${level == 1 ? "<summary>" + object + "</summary>" : ""}
+    
+//     {`;
+
+//     for(const [key, value] of Object.entries(object))
+//     {
+//         let val;
+
+//         switch(typeof value)
+//         {
+//             case 'object':
+//                 if(Array.isArray(value))
+//                 {
+//                     val = `[\n${"\t".repeat(level)}${displayObject(value, level+1)}\n]`;
+//                 }
+//                 val = `{\n${"\t".repeat(level)}${displayObject(value, level+1)}\n}`;
+//                 break;
+
+//             case 'function':
+//                 val = displayFunction(value);
+//                 break;
+            
+//             case 'string':
+//                 val = displayString(value);
+            
+//             default:
+//                 val = displayPrimitive(value);
+//         }
+
+//         detailsElem += `${key}: ${val}\n`;
+//     }
+
+//     detailsElem += `}</details>`;
+
+//     return detailsElem;
+// }
+
+function displayObject(object)
+{
+    const replacer = (key, value) =>
+    {
+        switch(typeof value)
+        {
+            case 'object':
+                // Implement details elements
+                // return JSON.stringify(value, replacer, 4);
+                return value;
+
+            case 'function':
+                return displayFunction(value);
+            
+            case 'string':
+                return `<span data-string>${value}</span>`;
+
+            case 'undefined':
+                return displayUndefined();
+            
+            case 'bigint':
+            case 'number':
+            case 'boolean':
+                return displayPrimitive(value);
+
+        }
+    }
+
+    return JSON.stringify(object, replacer, 4).replace(/\r\n/gi, "\n");
 }
 
 function parseArgs(...args)
@@ -84,27 +171,35 @@ function parseArgs(...args)
 
     for(let arg of args)
     {
-        if(arg instanceof Object)
+        switch(typeof arg)
         {
-            try
-            {
-                res.push('<i>' + JSON.stringify(arg, null, ' '));
-            }
-            catch(err)
-            {
-                res.push(arg);
-            }
-        }
-        else
-        {
-            if(typeof arg == 'string')
-            {
-                res.push(`"${arg}"`);
-            }
-            else
-            {
-                res.push(`${arg}`);
-            }
+            case 'object':
+                try
+                {
+                    // res.push(displayObject(arg, 1));
+                    res.push(`<pre>${displayObject(arg)}</pre>`);
+                }
+                catch(err)
+                {
+                    console.error(err);
+                    res.push(arg);
+                }
+                break;
+            
+            case 'function':
+                res.push(displayFunction(arg));
+                break;
+            
+            case 'string':
+                res.push(displayString(arg));
+                break;
+
+            case 'undefined':
+                res.push(displayUndefined());
+                break;
+
+            default:
+                res.push(displayPrimitive(arg));
         }
     }
 
@@ -135,27 +230,49 @@ console.error = (...args) =>
     error(parseArgs(...args));
 }
 
-function message(type, text)
+console.dir = (...args) =>
+{
+    oldConsole.dir(...args);
+    dir(parseArgs(...args));
+}
+
+console.clear = () =>
+{
+    oldConsole.clear();
+    divOut.innerHTML = '';
+}
+
+function printOutput(type, value)
 {
     let div = document.createElement('div');
 
     div.classList.add(type);
-    div.innerHTML = text;
+    div.innerHTML = value;
     
     divOut.appendChild(div);
 }
 
-function info(text)
+function printInput(input)
 {
-    message('info', text);
+    printOutput('info', `<span data-input><span data-input-prefix>&gt;</span>${input}</span>`);
 }
 
-function warn(text)
+function info(value)
 {
-    message('warning', text);
+    printOutput('info', value);
 }
 
-function error(text)
+function warn(value)
 {
-    message('error', text);
+    printOutput('warning', value);
+}
+
+function error(value)
+{
+    printOutput('error', value);
+}
+
+function dir(value)
+{
+    printOutput('info', value);
 }

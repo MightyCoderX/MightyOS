@@ -103,12 +103,7 @@ applications.add(new Application('MightyCoderX', 'My website', 'https://mightyco
 applications.add(new Application('MightyOS', 'this', 'https://mightycoderx.github.io/favicon.ico', './'));
 applications.add(new Application('LAN-Chat', 'My LAN Chat', 'https://mcx-lan-chat.herokuapp.com/img/icon.svg', 'https://mcx-lan-chat.herokuapp.com'));
 
-let oldConsole = {
-    log: console.log,
-    info: console.info,
-    warn: console.warn,
-    error: console.error
-}
+let oldConsole = { ...console };
 
 function parseArgs(...args)
 {

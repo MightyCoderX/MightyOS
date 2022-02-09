@@ -37,9 +37,7 @@ btnDownload.addEventListener('click', e =>
 });
 
 let ctx = canvas.getContext('2d');
-ctx.fillStyle = getComputedStyle(canvas).backgroundColor;
-ctx.fillRect(0, 0, canvas.width, canvas.height);
-ctx.fillStyle = getComputedStyle(document.body).color;
+clearCanvas();
 ctx.strokeStyle = getComputedStyle(document.body).color;
 
 let size = sldSize.value;
@@ -155,7 +153,9 @@ document.addEventListener('keydown', function(e)
 
 function clearCanvas()
 {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = getComputedStyle(canvas).backgroundColor;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = color;
 }
 
 function draw(e)

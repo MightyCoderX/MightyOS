@@ -90,8 +90,6 @@ btnStartMenu.addEventListener('click', e =>
 btnRestart.addEventListener('click', () => location.reload());
 btnShutdown.addEventListener('click', () => window.close());
 
-
-
 let consoleApp = new Application('Console', 'A basic console that logs', './apps/console/icon.svg', './apps/console/');
 applications.add(consoleApp);
 
@@ -102,70 +100,7 @@ applications.add(new Application('Paint', 'A basic painting app', './apps/paint/
 applications.add(new Application('MightyCoderX', 'My website', 'https://mightycoderx.github.io/images/bg.jpg', 'https://mightycoderx.github.io'));
 applications.add(new Application('MightyOS', 'this', 'https://mightycoderx.github.io/favicon.ico', './'));
 applications.add(new Application('LAN-Chat', 'My LAN Chat', 'https://mcx-lan-chat.herokuapp.com/img/icon.svg', 'https://mcx-lan-chat.herokuapp.com'));
-
-let oldConsole = { ...console };
-
-function parseArgs(...args)
-{
-    let res = '';
-
-    for(let arg of args)
-    {
-        if(arg instanceof Object)
-        {
-            res += '<i>' + JSON.stringify(arg, null, ' ');
-        }
-        else
-        {
-            res += ` "${arg}"`;
-        }
-    }
-
-    return res;
-}
-
-console.log = (...args) =>
-{
-    oldConsole.log(...args);
-
-    if(!consoleApp.window) return;
-
-    let frame = consoleApp.window.iframe;
-    if(!frame) return;
-    frame?.contentWindow?.info?.(parseArgs(...args));
-}
-
-console.info = (...args) =>
-{
-    oldConsole.info(...args);
-
-    if(!consoleApp.window) return;
-
-    let frame = consoleApp.window.iframe;
-    if(!frame) return;
-    frame?.contentWindow?.info?.(parseArgs(...args));
-}
-
-console.warn = (...args) =>
-{
-    oldConsole.warn(...args);
-
-    if(!consoleApp.window) return;
-
-    let frame = consoleApp.window.iframe;
-    frame?.contentWindow?.warn?.(parseArgs(...args));
-}
-
-console.error = (...args) =>
-{
-    oldConsole.error(...args);
-
-    if(!consoleApp.window) return;
-
-    let frame = consoleApp.window.iframe;
-    if(!frame) return;
-    frame?.contentWindow?.error?.(parseArgs(...args));
-}
+applications.add(new Application('MusicMaker', 'Play Music and record it!', 'https://mightycoderx.github.io/MusicMaker/icon.svg', 'https://mightycoderx.github.io/MusicMaker/'));
 
 function createDesktopIcons()
 {

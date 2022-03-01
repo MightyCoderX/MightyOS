@@ -18,6 +18,9 @@ body, html
     background: #333;
     border: none;
     font-size: 12px;
+    word-wrap: break-word;
+    word-break: break-all;
+    overflow: hidden;
 }
 
 .out div

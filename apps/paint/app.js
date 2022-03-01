@@ -83,7 +83,7 @@ function mouseDown(e)
 
     if(tool == tools.circle)
     {
-        drawCircle(ctx, posX, posY, size, color);
+        drawCircle(posX, posY, size, color);
     }
     else
     {
@@ -115,32 +115,32 @@ colorPicker.addEventListener('change', e =>
 
 btnClear.addEventListener('click', clearCanvas);
 
-sldSize.addEventListener('input', function()
+sldSize.addEventListener('input', () =>
 {
     size = sldSize.value;
     nmbSize.value = size;
 });
-nmbSize.value = 4;
-nmbSize.addEventListener('change', function()
+
+nmbSize.addEventListener('change', () =>
 {
     sldSize.value = nmbSize.value;
     size = nmbSize.value;
 });
 
-btnPen.addEventListener('click', function()
+btnPen.addEventListener('click', () =>
 {
     tool = tools.pen;
 });
-btnEraser.addEventListener('click', function()
+btnEraser.addEventListener('click', () =>
 {
     tool = tools.eraser;
 });
-btnCircle.addEventListener('click', function()
+btnCircle.addEventListener('click', () =>
 {
     tool = tools.circle;
 });
 
-document.addEventListener('keydown', function(e)
+document.addEventListener('keydown', e =>
 {
     if(e.ctrlKey)
     { 
@@ -185,12 +185,12 @@ function draw(e)
     }
 }
 
-function drawCircle(context, x, y, radius, color)
+function drawCircle(x, y, radius, color)
 {
-    context.beginPath();
-    context.arc(x, y, radius/2, 0, 2 * Math.PI);
-    context.fillStyle = color;
-    context.fill();
-    context.stroke();
+    ctx.beginPath();
+    ctx.arc(x, y, radius/2, 0, 2 * Math.PI);
+    ctx.fillStyle = color;
+    ctx.fill();
+    ctx.stroke();
 }
 

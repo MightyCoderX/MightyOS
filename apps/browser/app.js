@@ -8,7 +8,7 @@ const iframe = document.querySelector('iframe');
 // iframe.addEventListener('load', () =>
 // {
 //     console.log(iframe.contentWindow.document);
-//     document.title = iframe.contentWindow.document.title;
+//     document.title = 'Browser - ' + iframe.contentWindow.document.title;
 // });
 
 

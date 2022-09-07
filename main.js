@@ -20,9 +20,8 @@ if(localStorage.getItem('desktop-bg'))
     desktop.style.backgroundImage = `url('${localStorage.getItem('desktop-bg')}')`;
 }
 
-desktop.addEventListener('contextmenu', e =>
+function openContextMenu(x, y)
 {
-    e.preventDefault();
     const contextMenu = new ContextMenu([
         {
             label: 'Set Desktop Background',
@@ -57,10 +56,16 @@ desktop.addEventListener('contextmenu', e =>
             label: 'Refresh',
             action: createDesktopIcons
         }
-    ], { x: e.clientX, y: e.clientY });
+    ], { x, y });
 
     document.querySelector('context-menu')?.remove?.();
     document.body.appendChild(contextMenu);
+}
+
+desktop.addEventListener('contextmenu', e =>
+{
+    e.preventDefault();
+    openContextMenu(e.clientX, e.clientY);
 });
 
 

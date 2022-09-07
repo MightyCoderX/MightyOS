@@ -25,7 +25,6 @@ draggableWindowTemplate.innerHTML = `
             transition-property: transform;
             transition-duration: 0.1s;
             transition-timing-function: ease-in;
-            border: 1px solid #222;
             pointer-events: all;
             width: var(--window-width);
             height: calc(var(--window-width) * 9/16);
@@ -94,6 +93,7 @@ draggableWindowTemplate.innerHTML = `
             height: calc(100% - var(--header-height));
             width: 100%;
             user-select: none;
+            border: 1px solid #222;
         }
     </style>
     <div class="window">

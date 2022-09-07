@@ -13,6 +13,8 @@ contextMenuTemplate.innerHTML = `
         .context-menu
         {
             position: absolute;
+            top: 0;
+            left: 0;
             background-color: #222;
             color: #ddd;
             width: max-content;

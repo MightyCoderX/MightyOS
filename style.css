@@ -17,6 +17,14 @@ html, body
     -moz-font-smoothing: grayscale;
 }
 
+/* find a way to do this inside custom element */
+/* context-menu
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+} */
+
 span[class^="material-icons"]
 {
     display: block;

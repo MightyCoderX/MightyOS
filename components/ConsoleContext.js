@@ -171,7 +171,6 @@ function displayObject(object)
 
 function printOutput(type, value, consoleAppWindow)
 {
-    browserConsole.log(consoleAppWindow, consoleApp);
     let div = document.createElement('div');
 
     div.classList.add(type);

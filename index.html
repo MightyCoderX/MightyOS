@@ -25,15 +25,16 @@
     <body>
         <div class="desktop"></div>
         <div class="windows-overlay"></div>
+        <!-- TODO make panel a component -->
         <div class="panel">
             <div class="start-menu">
                 <button id="btnStartMenu"><img src="start_menu_icon.svg" alt="Menu"></button>
                 <div class="menu" tabindex="-1">
                     <aside>
-                        <button id="btnShutdown">
+                        <button id="btnShutdown" title="Shutdown">
                             <span class="material-icons-round">power_settings_new</span>
                         </button>
-                        <button id="btnRestart">
+                        <button id="btnRestart" title="Restart">
                             <span class="material-icons-round">restart_alt</span>
                         </button>
                     </aside>

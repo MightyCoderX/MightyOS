@@ -96,11 +96,12 @@ btnShutdown.addEventListener('click', () => window.close());
 let consoleApp = new Application('Console', 'A basic console that logs', './apps/console/icon.svg', './apps/console/');
 applications.add(consoleApp);
 
-applications.add(new Application('Notepad', 'A basic notepad', './apps/notepad/icon.svg', './apps/notepad/'));
+applications.add(new Application('Notepad', 'A basic notepad', './apps/notepad/icon.svg', './apps/notepad'));
 applications.add(new Application('Browser', 'A basic web browser', './apps/browser/icon.svg', './apps/browser'));
 applications.add(new Application('Paint', 'A basic painting app', './apps/paint/icon.ico', './apps/paint'));
+applications.add(new Application('Debug', 'Debug app', './apps/debug/icon.svg', './apps/debug'));
 
-applications.add(new Application('MightyCoderX', 'My website', 'https://mightycoderx.github.io/images/bg.jpg', 'https://mightycoderx.github.io'));
+applications.add(new Application('MightyCoderX', 'My website', 'https://mightycoderx.github.io/favicon.svg', 'https://mightycoderx.github.io'));
 applications.add(new Application('MightyOS', 'this', 'https://mightycoderx.github.io/favicon.ico', './'));
 applications.add(new Application('LAN-Chat', 'My LAN Chat', 'https://mcx-lan-chat.herokuapp.com/img/icon.svg', 'https://mcx-lan-chat.herokuapp.com'));
 applications.add(new Application('MusicMaker', 'Play Music and record it!', 'https://mightycoderx.github.io/MusicMaker/icon.svg', 'https://mightycoderx.github.io/MusicMaker/'));
@@ -110,6 +111,7 @@ function createDesktopIcons()
     desktop.innerHTML = '';
     for(let app of applications)
     {
+        //TODO use the constructor of DesktopIcon instead
         let desktopIcon = document.createElement('desktop-icon');
         desktopIcon.setAttribute('icon-src', app.iconSrc);
         desktopIcon.setAttribute('label', app.name);

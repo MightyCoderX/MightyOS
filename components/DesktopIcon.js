@@ -63,7 +63,7 @@ class DesktopIcon extends HTMLElement
     
     connectedCallback()
     {
-        this.draggable = 'true';
+        this.draggable = true;
         this.shadow.querySelector('.desktop-icon .img').style.backgroundImage = `url('${this.getAttribute('icon-src')}')`;
         this.shadow.querySelector('.desktop-icon p').textContent = this.getAttribute('label');
         this.container = this.shadow.querySelector('.desktop-icon');

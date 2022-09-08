@@ -45,7 +45,6 @@ span[class^="material-icons"]
     width: 100vw;
     gap: 10px;
     padding: 10px;
-    background-position: center;
 }
 
 .windows-overlay
@@ -140,7 +139,7 @@ span[class^="material-icons"]
 
 .panel .menu
 {
-    height: 60vh;
+    height: 65vh;
     width: 25vw;
     min-width: max-content;
     position: absolute;
@@ -154,6 +153,7 @@ span[class^="material-icons"]
     transition-property: transform, opacity;
     transition-duration: 0.2s;
     display: flex;
+    overflow: hidden;
 }
 
 .panel .menu aside
@@ -188,6 +188,7 @@ span[class^="material-icons"]
 .panel .menu .app-list
 {
     width: 100%;
+    overflow: auto;
 }
 
 .panel .menu.show

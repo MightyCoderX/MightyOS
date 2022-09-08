@@ -68,8 +68,6 @@ desktop.addEventListener('contextmenu', e =>
     openContextMenu(e.clientX, e.clientY);
 });
 
-
-
 btnStartMenu.addEventListener('click', e =>
 {
     if(!menuElem.classList.contains('show'))

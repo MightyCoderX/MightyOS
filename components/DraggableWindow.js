@@ -364,7 +364,7 @@ class DraggableWindow extends HTMLElement
         this.windowFrame.style.transformOrigin = 'center';
         this.windowFrame.style.transform = 'scale(0)';
 
-        let dur = this.shadow.styleSheets[0].cssRules[0].style.transitionDuration.slice(0, -1);
+        let dur = this.shadow.styleSheets[0].cssRules[1].style.transitionDuration.slice(0, -1);
         
         setTimeout(() =>
         {

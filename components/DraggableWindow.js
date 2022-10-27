@@ -136,7 +136,6 @@ class DraggableWindow extends HTMLElement
 
         this.titleElem.innerText = this.getAttribute('window-title');
         this.body.src = this.getAttribute('content-url');
-        this.titleElem.innerText = this.getAttribute('window-title');
         
         this.body.addEventListener('load', e =>
         {

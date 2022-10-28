@@ -50,12 +50,11 @@ span[class^="material-icons"]
 .windows-overlay
 {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: calc(100% - var(--panel-height));
+    inset: 0;
+    bottom: var(--panel-height);
     pointer-events: none;
     isolation: isolate;
+    overflow: hidden;
 }
 
 .panel

@@ -1,5 +1,5 @@
 # MightyOS
- A basic web "operating system"
+A basic web "operating system"
 
 ## Features
 - [x] Desktop

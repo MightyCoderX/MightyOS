@@ -1,3 +1,5 @@
+@import url(variables.css);
+
 *
 {
     margin: 0;
@@ -9,7 +11,7 @@
 
 html, body
 {
-    background: #111;
+    background: var(--bg-color);
     color: white;
     overflow: hidden;
     width: 100%;
@@ -29,11 +31,6 @@ span[class^="material-icons"]
 {
     display: block;
     line-height: 1;
-}
-
-:root
-{
-    --panel-height: 35px;
 }
 
 .desktop
@@ -64,7 +61,8 @@ span[class^="material-icons"]
     left: 0;
     width: 100%;
     height: var(--panel-height);
-    background: #222;
+    background: var(--bg-color);
+    backdrop-filter: var(--backdrop);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -94,11 +92,11 @@ span[class^="material-icons"]
 
 .panel-right #clock
 {
-    background: transparent;
-    color: #fff;
+    background-color: transparent;
+    color: var(--text-color);
     border: none;
     outline: none;
-    padding: 0.5rem;
+    padding: 0 0.5rem;
     font-weight: 500;
     font-family: monospace;
 }
@@ -109,12 +107,23 @@ span[class^="material-icons"]
     aspect-ratio: 1;
     outline: none;
     border: none;
-    background: none;
-    transition-property: background, border;
+    background-color: transparent;
+    transition-property: background-color, border;
     transition-duration: 0.1s;
     display: grid;
     place-items: center;
     user-select: none;
+}
+
+.panel #btnStartMenu:focus-visible
+{
+    outline: 2px solid var(--accent-color);
+    outline-offset: -2px;
+}
+
+.panel #btnStartMenu:hover
+{
+    background-color: #fff2;
 }
 
 .panel #btnStartMenu img
@@ -125,17 +134,6 @@ span[class^="material-icons"]
     user-select: none;
 }
 
-.panel #btnStartMenu:focus
-{
-    outline: 2px solid white;
-    outline-offset: -2px;
-}
-
-.panel #btnStartMenu:hover
-{
-    background-color: #fff2;
-}
-
 .panel .menu
 {
     height: 65vh;
@@ -144,12 +142,12 @@ span[class^="material-icons"]
     position: absolute;
     bottom: var(--panel-height);
     left: 0;
-    background: #252525;
-    transform-origin: bottom;
-    transform: scaleY(0);
+    background-color: var(--bg-color);
+    transform-origin: bottom left;
+    scale: 0;
     opacity: 0;
     outline: none;
-    transition-property: transform, opacity;
+    transition-property: scale, opacity;
     transition-duration: 0.2s;
     display: flex;
     overflow: hidden;
@@ -167,21 +165,21 @@ span[class^="material-icons"]
 {
     width: 35px;
     aspect-ratio: 1;
-    background: transparent;
+    background-color: transparent;
     color: white;
     border: none;
     display: grid;
     place-items: center;
 }
 
+.panel .menu aside button:hover
+{
+    background-color: #fff2;
+}
+
 .panel .menu aside button span
 {
     font-size: 20px;
-}
-
-.panel .menu aside button:hover
-{
-    background: #fff2;
 }
 
 .panel .menu .app-list
@@ -192,7 +190,7 @@ span[class^="material-icons"]
 
 .panel .menu.show
 {
-    transform: scaleY(1);
+    scale: 1;
     opacity: 1;
 }
 

@@ -33,7 +33,7 @@ contextMenuTemplate.innerHTML = `
         {
             display: flex;
             align-items: center;
-            padding: 0.7rem 1rem;
+            padding: 0.5rem 0.6rem;
         }
 
         .context-menu li:hover

@@ -41,9 +41,7 @@ contextMenuTemplate.innerHTML = `
             background-color: #fff2;
         }
     </style>
-    <ul class="context-menu" tabindex="-1">
-
-    </ul>
+    <menu class="context-menu" tabindex="-1"></menu>
 `;
 
 class ContextMenu extends HTMLElement
@@ -63,7 +61,7 @@ class ContextMenu extends HTMLElement
 
     connectedCallback()
     {
-        const contextMenuElem = this.shadow.querySelector('ul.context-menu');
+        const contextMenuElem = this.shadow.querySelector('.context-menu');
         contextMenuElem.focus();
         
         contextMenuElem.style.left = `${this.position.x}px`

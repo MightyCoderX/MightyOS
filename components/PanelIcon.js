@@ -71,7 +71,7 @@ class PanelIcon extends HTMLElement
         let panelIconElem = this.shadow.querySelector('.panel-icon');
         
         panelIconElem.title = this.getAttribute('app-desc');
-        panelIconElem.addEventListener('click', e => this.toggleMinimized());
+        panelIconElem.addEventListener('click', () => this.toggleMinimized());
     }
 
     toggleMinimized()

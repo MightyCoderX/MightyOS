@@ -109,6 +109,8 @@ draggableWindowTemplate.innerHTML = `
             width: 100%;
             user-select: none;
             border: 1px solid #222;
+            overscroll-behavior: none;
+            overflow: hidden;
         }
 
         .window .body iframe

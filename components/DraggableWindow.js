@@ -27,7 +27,7 @@ draggableWindowTemplate.innerHTML = `
             border-radius: 0.5rem 0.5rem 0 0;
             overflow: hidden;
             box-shadow: 0px 0px 5px #222222a4;
-            transition-property: transform;
+            transition-property: scale;
             transition-duration: var(--transition-duration);
             transition-timing-function: ease-in;
             pointer-events: all;

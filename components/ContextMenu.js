@@ -15,7 +15,8 @@ contextMenuTemplate.innerHTML = `
             position: absolute;
             top: 0;
             left: 0;
-            background-color: #222;
+            background-color: var(--bg-color-alpha);
+            backdrop-filter: var(--backdrop);
             color: #ddd;
             width: max-content;
             height: max-content;

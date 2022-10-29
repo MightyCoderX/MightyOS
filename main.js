@@ -22,7 +22,8 @@ if(localStorage.getItem('desktop-bg'))
 
 function openContextMenu(x, y)
 {
-    const contextMenu = new ContextMenu([
+    const contextMenu = new ContextMenu(
+    [
         {
             label: 'Set Desktop Background',
             action()
@@ -72,7 +73,7 @@ desktop.addEventListener('contextmenu', e =>
     openContextMenu(e.clientX, e.clientY);
 });
 
-btnStartMenu.addEventListener('click', e =>
+btnStartMenu.addEventListener('click', () =>
 {
     if(!menuElem.classList.contains('show'))
     {
@@ -152,7 +153,6 @@ async function setRandomBg()
 
     image.addEventListener('load', () =>
     {
-        
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
         
@@ -163,7 +163,7 @@ async function setRandomBg()
         
         desktop.style.backgroundImage = `url('${canvas.toDataURL()}')`;
 
-        //* Won't save random images without backend, cause they'd clutter localStorage
+        // Won't save random images without backend, cause they'd clutter localStorage
         // try
         // {
         //     localStorage.setItem('desktop-bg', canvas.toDataURL());

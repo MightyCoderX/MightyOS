@@ -37,11 +37,13 @@ desktopIconTemplate.innerHTML = `
         
         .desktop-icon p
         {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;  
             font-size: 12px;
             margin-top: 5px;
             text-align: center;
             word-break: break-word;
-            text-overflow: ellipsis;
             filter: drop-shadow(0 0 0.2rem #000);
         }
     </style>

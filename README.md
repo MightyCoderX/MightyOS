@@ -11,6 +11,8 @@ A basic web "operating system"
 
 ## Todo
 - [ ] Move window focus functionality out of DraggableWindow.js
+- [ ] Use WASM
+- [ ] Add box selection in desktop
     - Maybe use attributes
 - [ ] Fix all page moving when clicking link to an element with id
 - [x] Prevent Image Dragging

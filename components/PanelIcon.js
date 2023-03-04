@@ -78,14 +78,7 @@ export default class PanelIcon extends HTMLElement
 
     toggleMinimized()
     {
-        applications.forEach(app =>
-        {
-            if(app.name == this.getAttribute('app-name'))
-            {
-                app.window.minimize();
-                return;
-            }
-        });
+        dispatchToggleMinimizeWindow(this.getAttribute('app-name'))
     }
 }
 

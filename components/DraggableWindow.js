@@ -228,7 +228,7 @@ export default class DraggableWindow extends HTMLElement
             bubbles: false,
             cancelable: false,
             composed: true,
-            detail: 
+            detail:
             {
                 set focused(val)
                 {

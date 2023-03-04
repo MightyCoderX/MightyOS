@@ -71,17 +71,17 @@ export default class DesktopIcon extends HTMLElement
         this.shadow.querySelector('.desktop-icon .img').style.backgroundImage = `url('${this.getAttribute('icon-src')}')`;
         this.shadow.querySelector('.desktop-icon p').textContent = this.getAttribute('label');
         this.container = this.shadow.querySelector('.desktop-icon');
-        
+
         this.container.addEventListener('dblclick', e =>
         {
-            let appName = this.getAttribute('app-name');
-            applications.forEach(app =>
-            {
-                if(app.name == appName && !app.window)
-                {
-                    app.createWindow();
-                }
-            });
+            dispatchOpenWindow(this.getAttribute('app-name'));
+        });
+
+        this.container.addEventListener('keypress', e =>
+        {
+            console.log(e);
+            if(!['Enter', 'Space'].includes(e.code)) return;
+            dispatchOpenWindow(this.getAttribute('app-name'));
         });
     }
 }

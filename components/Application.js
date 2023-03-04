@@ -39,13 +39,14 @@ export default class Application
         //     this.#iframe.contentWindow.focus();
         // });
 
-        windowsOverlay.appendChild(this.window);
+        windowOverlay.appendChild(this.window);
         
         this.window.addEventListener('close', () =>
         {
             this.panelIcon.remove();
             this.panelIcon = null;
             this.window = null;
+            delete this;
         });
     }
 }

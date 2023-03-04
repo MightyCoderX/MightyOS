@@ -60,13 +60,7 @@ export default class StartMenuItem extends HTMLElement
         this.startMenuItemElem.addEventListener('click', () =>
         {
             let appName = this.getAttribute('app-name');
-            applications.forEach(app =>
-            {
-                if(app.name == appName && !app.window)
-                {
-                    app.createWindow();
-                }
-            });
+            dispatchOpenWindow(appName);
         });
     }
 }

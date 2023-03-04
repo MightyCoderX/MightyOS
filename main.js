@@ -9,7 +9,7 @@ const btnShutdown = document.getElementById('btnShutdown');
 const btnRestart = document.getElementById('btnRestart');
 const menuElem = document.querySelector('.menu');
 const desktop = document.querySelector('.desktop');
-const windowsOverlay = document.querySelector('.windows-overlay');
+const windowOverlay = document.querySelector('.window-overlay');
 const panelApps = document.querySelector('.panel .panel-apps');
 
 const btnClock = document.querySelector('.panel .panel-right #clock');

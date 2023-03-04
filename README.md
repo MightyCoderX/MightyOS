@@ -10,10 +10,12 @@ A basic web "operating system"
 - [ ] ...
 
 ## Todo
+- [ ] use Crypto UUIDs to identify windows to prepare for multiple windows per app open
 - [ ] Move window focus functionality out of DraggableWindow.js
+    - Maybe use attributes
+- [ ] Integrate file system API to save my os file system in a single root folder on the user's PC
 - [ ] Use WASM
 - [ ] Add box selection in desktop
-    - Maybe use attributes
 - [ ] Fix all page moving when clicking link to an element with id
 - [x] Prevent Image Dragging
 - [ ] Work on draggable desktop icons

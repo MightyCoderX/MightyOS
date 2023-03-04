@@ -19,7 +19,8 @@ new MutationObserver(mutations =>
             document.scrollingElement.scrollTo(0, document.scrollingElement.scrollHeight+100);
         }
     });
-}).observe(divOut, {
+}).observe(divOut,
+{
     childList: true
 });
 

@@ -20,6 +20,7 @@ setInterval(() =>
 }, 500);
 
 const applications = new Set();
+let focusedWindow = 0;
 let currentBgUrl = '';
 
 if(localStorage.getItem('desktop-bg'))

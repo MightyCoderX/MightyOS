@@ -20,6 +20,7 @@ setInterval(() =>
 }, 500);
 
 const applications = new Set();
+let currentBgUrl = '';
 
 if(localStorage.getItem('desktop-bg'))
 {
@@ -151,39 +152,27 @@ if(!localStorage.getItem('desktop-bg')) setRandomBg();
 async function setRandomBg()
 {
     const { width, height } = screen;
+    const trueWidth = width*devicePixelRatio;
+    const trueHeight = height*devicePixelRatio;
 
-    const image = new Image();
-    image.src = `https://source.unsplash.com/random/${width*devicePixelRatio}x${height*devicePixelRatio}/?nature`;
+    const res = await fetch(`https://source.unsplash.com/random/${trueWidth}x${trueHeight}?nature`);
+
+    desktop.style.backgroundImage = `url(${res.url})`;
+
+    currentBgUrl = res.url;
     
-    image.crossOrigin = 'anonymous';
-
-    image.addEventListener('load', () =>
+    try
     {
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        
-        canvas.width = image.naturalWidth;
-        canvas.height = image.naturalHeight;
-        
-        ctx.drawImage(image, 0, 0);
-        
-        desktop.style.backgroundImage = `url('${canvas.toDataURL()}')`;
+        localStorage.setItem('desktop-bg', res.url);
+    }
+    catch(err)
+    {
+        if(err.name === 'QuotaExceededError')
+        {
+            console.warn('Couldn\'t save desktop background, the url is too big for localStorage (How?)');
+            return;
+        }
 
-        // Won't save random images without backend, cause they'd clutter localStorage
-        // try
-        // {
-        //     localStorage.setItem('desktop-bg', canvas.toDataURL());
-        // }
-        // catch(err)
-        // {
-        //     if(err.name === 'QuotaExceededError')
-        //     {
-        //         console.warn('Couldn\'t save desktop background, the image is too big for localStorage');
-        //         return;
-        //     }
-
-        //     console.dir(err);
-        // }
-    });
-    
+        console.dir(err);
+    }
 }

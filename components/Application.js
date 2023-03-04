@@ -11,9 +11,9 @@ export default class Application
         this.url = url;
     }
 
-    createWindow()
+    createWindow(panelApps, windowOverlay)
     {
-        this.panelIcon = document.createElement('panel-icon');
+        this.panelIcon = new PanelIcon();
         this.panelIcon.setAttribute('icon-src', this.iconSrc);
         this.panelIcon.setAttribute('app-name', this.name);
         this.panelIcon.setAttribute('app-desc', this.desc);

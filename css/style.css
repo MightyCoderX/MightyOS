@@ -44,7 +44,7 @@ span[class^="material-icons"]
     padding: 10px;
 }
 
-.windows-overlay
+.window-overlay
 {
     position: absolute;
     inset: 0;

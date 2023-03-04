@@ -1,4 +1,7 @@
-class Application
+import PanelIcon from './PanelIcon.js';
+import DraggableWindow from './DraggableWindow.js';
+
+export default class Application
 {
     constructor(name, desc, iconSrc, url)
     {

@@ -138,7 +138,7 @@ draggableWindowTemplate.innerHTML = `
     </div>
 `;
 
-class DraggableWindow extends HTMLElement
+export default class DraggableWindow extends HTMLElement
 {
     #shadow;
 

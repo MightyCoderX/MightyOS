@@ -1,3 +1,5 @@
+import { dispatchOpenWindow } from '../lib/window-event-dispatchers.js';
+
 const desktopIconTemplate = document.createElement('template');
 
 desktopIconTemplate.innerHTML = `
@@ -53,7 +55,7 @@ desktopIconTemplate.innerHTML = `
     </div>
 `;
 
-class DesktopIcon extends HTMLElement
+export default class DesktopIcon extends HTMLElement
 {
     constructor()
     {

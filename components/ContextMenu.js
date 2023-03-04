@@ -44,7 +44,7 @@ contextMenuTemplate.innerHTML = `
     <menu class="context-menu" tabindex="-1"></menu>
 `;
 
-class ContextMenu extends HTMLElement
+export default class ContextMenu extends HTMLElement
 {
     constructor(items, position)
     {

@@ -1,3 +1,9 @@
+import Application from './components/Application.js';
+import ContextMenu from './components/ContextMenu.js';
+import DesktopIcon from './components/DesktopIcon.js';
+import StartMenuItem from './components/StartMenuItem.js'
+
+
 const btnStartMenu = document.getElementById('btnStartMenu');
 const btnShutdown = document.getElementById('btnShutdown');
 const btnRestart = document.getElementById('btnRestart');
@@ -117,7 +123,7 @@ function createDesktopIcons()
     for(let app of applications)
     {
         //TODO use the constructor of DesktopIcon instead
-        let desktopIcon = document.createElement('desktop-icon');
+        let desktopIcon = new DesktopIcon();
         desktopIcon.setAttribute('icon-src', app.iconSrc);
         desktopIcon.setAttribute('label', app.name);
         desktopIcon.setAttribute('app-name', app.name);
@@ -131,7 +137,7 @@ function createStartMenuItems()
     const startMenuAppList = menuElem.querySelector('.app-list');
     for(let app of applications)
     {
-        let startMenuItem = document.createElement('start-menu-item');
+        let startMenuItem = new StartMenuItem();
         startMenuItem.setAttribute('app-name', app.name);
         startMenuItem.setAttribute('icon-src', app.iconSrc);
         startMenuAppList.appendChild(startMenuItem);

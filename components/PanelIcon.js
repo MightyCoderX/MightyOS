@@ -1,3 +1,5 @@
+import { dispatchToggleMinimizeWindow } from '../lib/window-event-dispatchers.js';
+
 const panelAppIconTemplate = document.createElement('template');
 
 panelAppIconTemplate.innerHTML = `
@@ -54,7 +56,7 @@ panelAppIconTemplate.innerHTML = `
     </div>
 `;
 
-class PanelIcon extends HTMLElement
+export default class PanelIcon extends HTMLElement
 {
     constructor()
     {

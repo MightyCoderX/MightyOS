@@ -1,3 +1,5 @@
+import { dispatchOpenWindow } from '../lib/window-event-dispatchers.js';
+
 const startMenuItemTemplate = document.createElement('template');
 
 startMenuItemTemplate.innerHTML = `
@@ -37,7 +39,7 @@ startMenuItemTemplate.innerHTML = `
     </div>
 `;
 
-class StartMenuItem extends HTMLElement
+export default class StartMenuItem extends HTMLElement
 {
     constructor()
     {

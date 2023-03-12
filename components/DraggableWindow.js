@@ -18,7 +18,7 @@ draggableWindowTemplate.innerHTML = `
             --window-width: 60vw;
             --transition-duration: 0.08s;
         
-            position: fixed;
+            position: absolute;
             display: block;
             color: white;
             font-family: sans-serif;
@@ -110,6 +110,7 @@ draggableWindowTemplate.innerHTML = `
             width: 100%;
             user-select: none;
             border: 1px solid #222;
+            border-top: none;
             overscroll-behavior: none;
             overflow: hidden;
         }
@@ -133,7 +134,7 @@ draggableWindowTemplate.innerHTML = `
             </div>
         </div>
         <div class="body">
-            <iframe src="." allowtransparency></iframe>
+            <iframe scrolling="no" src="." allowtransparency></iframe>
         </div>
     </div>
 `;
@@ -162,7 +163,6 @@ export default class DraggableWindow extends HTMLElement
     #size;
 
     #closeEvent;
-    #shouldFocusEvent
     
     #_position;
 
@@ -176,6 +176,7 @@ export default class DraggableWindow extends HTMLElement
 
     connectedCallback()
     {
+        // this.style.position = 'absolute';
         this.#windowFrame = this.#shadow.querySelector('.window');
         this.#header = this.#shadow.querySelector('.header');
         this.#titleElem = this.#shadow.querySelector('.header .title');
@@ -220,36 +221,14 @@ export default class DraggableWindow extends HTMLElement
             cancelable: false,
             composed: true
         });
-
-        const dragWin = this; 
-
-        this.#shouldFocusEvent = new CustomEvent('shouldfocus',
-        {
-            bubbles: false,
-            cancelable: false,
-            composed: true,
-            detail:
-            {
-                set focused(val)
-                {
-                    dragWin.#focused = val;
-                },
-                get focused() 
-                {
-                    return dragWin.#focused
-                },
-                frame: this.#windowFrame
-            }
-        });
-        this.dispatchEvent(this.#shouldFocusEvent);
         
         this.#btnMinimize.addEventListener('click', () => this.minimize());
         this.#btnMaximize.addEventListener('click', () => this.maximize());
         this.#btnClose.addEventListener('click', () => this.close());
 
-        new ResizeObserver(() =>
+        new ResizeObserver((entries) =>
         {
-            let { width, height } = this.#windowFrame.getBoundingClientRect();
+            let { width, height } = entries[0].contentRect;
             this.#size = { width, height };
             this.#iframe.style.pointerEvents = 'none';
             
@@ -257,6 +236,11 @@ export default class DraggableWindow extends HTMLElement
             {
                 this.#iframe.style.pointerEvents = 'all';
             }, { once: true });
+
+            // if(this.#maximized)
+            // {
+            //     this.maximize();
+            // }
 
         }).observe(this.#windowFrame);
 
@@ -268,6 +252,30 @@ export default class DraggableWindow extends HTMLElement
 
         this.#dragWindow();
         // this.resize();
+    }
+
+    focus()
+    {
+        const windowShallFocusEvent = new CustomEvent('windowshallfocus',
+        {
+            bubbles: false,
+            cancelable: false,
+            composed: true,
+            detail: { win: this }
+        });
+        
+        document.dispatchEvent(windowShallFocusEvent);
+
+        this.#focused = true;
+        this.#windowFrame.style.zIndex = '1';
+        
+        this.#iframe.contentWindow.focus();
+    }
+
+    unfocus()
+    {
+        this.#focused = false;
+        this.#windowFrame.style.zIndex = '0';
     }
 
     set #position({x, y})
@@ -291,7 +299,7 @@ export default class DraggableWindow extends HTMLElement
         {
             if(!e.target.matches('.header')) return;
 
-            this.dispatchEvent(this.#shouldFocusEvent);
+            this.focus();
 
             let clientX = e.clientX | e.changedTouches?.[0].pageX;
             let clientY = e.clientY | e.changedTouches?.[0].pageY;
@@ -337,11 +345,11 @@ export default class DraggableWindow extends HTMLElement
 
                 windowDrag(clientX, clientY);
                 
-                // if(!maximized && this.windowContainer.offsetTop <= 5)
+                // if(!this.#maximized && this.#windowFrame.offsetTop <= 5)
                 // {
                 //     mouseDown = false;
                 //     this.maximize();
-                //     this.windowContainer.blur();
+                //     this.#windowFrame.blur();
                 //     return;
                 // }
             }   
@@ -371,6 +379,8 @@ export default class DraggableWindow extends HTMLElement
 
     async minimize()
     {
+        this.focus();
+
         if(!this.#minimized)
         {
             if(this.#maximized) await this.maximize();
@@ -404,6 +414,8 @@ export default class DraggableWindow extends HTMLElement
 
     async maximize(animateBack = true)
     {
+        this.focus();
+
         if(!this.#maximized)
         {
             this.#startSize = 
@@ -414,10 +426,10 @@ export default class DraggableWindow extends HTMLElement
 
             this.#windowFrame.classList.add('maximized');
             
-            this.#windowFrame.style.top = 0;
-            this.#windowFrame.style.left = 0;
-            this.#windowFrame.style.width = window.innerWidth + 'px';
-            this.#windowFrame.style.height = window.innerHeight + 'px';
+            this.#windowFrame.style.top = 0; 
+            this.#windowFrame.style.left = 0; 
+            this.#windowFrame.style.width = '100%';
+            this.#windowFrame.style.height = '100%';
             this.#windowFrame.style.borderRadius= 0;
             this.#maximized = true;
         }

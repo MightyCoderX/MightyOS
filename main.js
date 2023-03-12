@@ -19,6 +19,9 @@ setInterval(() =>
     btnClock.title = (new Date()).toLocaleDateString();
 }, 500);
 
+/**
+ * @type {Set<Application>}
+ */
 const applications = new Set();
 let focusedWindow = 0;
 let currentBgUrl = '';
@@ -124,11 +127,18 @@ document.addEventListener('openwindow', e =>
     applications.forEach(app =>
     {
         if(app.name == e.detail.appName && !app.window)
-        {       
-            console.log(panelApps);      
+        {   
             app.createWindow(panelApps, windowOverlay);
         }
     });   
+});
+
+document.addEventListener('windowshallfocus', e =>
+{
+    [...applications].filter(app => app.window).map(app => app.window).forEach(w =>
+    {
+        w.unfocus();
+    });
 });
 
 document.addEventListener('toggleminimize', e =>
@@ -187,6 +197,7 @@ async function setRandomBg()
 
     currentBgUrl = res.url;
     
+    //TODO make saving desktop bg optional
     try
     {
         localStorage.setItem('desktop-bg', res.url);

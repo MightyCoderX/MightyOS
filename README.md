@@ -10,8 +10,8 @@ A basic web "operating system"
 - [ ] ...
 
 ## Todo
-- [ ] create a component library for MightyOS for the sake of better customization
-- [ ] use Crypto UUIDs to identify windows to prepare for multiple windows per app open
+- [ ] Create a component library for MightyOS for the sake of better customization
+- [ ] Use Crypto UUIDs to identify windows to prepare for multiple windows per app open
 - [ ] Move window focus functionality out of DraggableWindow.js
     - Maybe use attributes
 - [ ] Integrate file system API to save my os file system in a single root folder on the user's PC

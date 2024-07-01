@@ -117,7 +117,7 @@ applications.add(new Application('Browser', 'A basic web browser', './apps/brows
 applications.add(new Application('Paint', 'A basic painting app', './apps/paint/icon.ico', './apps/paint'));
 applications.add(new Application('Debug', 'Debug app', './apps/debug/icon.svg', './apps/debug'));
 
-applications.add(new Application('MightyCoderX', 'My website', 'https://mightycoderx.github.io/favicon.svg', 'https://mightycoderx.github.io'));
+applications.add(new Application('MightyCoderX', 'My website', 'https://old.mightycoderx.dev/favicon.svg', 'https://old.mightycoderx.dev'));
 applications.add(new Application('MightyOS', 'this', 'https://mightycoderx.github.io/favicon.ico', './'));
 // applications.add(new Application('LAN-Chat', 'My LAN Chat', 'https://mcx-lan-chat.herokuapp.com/img/icon.svg', 'https://mcx-lan-chat.herokuapp.com'));
 applications.add(new Application('MusicMaker', 'Play Music and record it!', 'https://mightycoderx.github.io/MusicMaker/icon.svg', 'https://mightycoderx.github.io/MusicMaker/'));
